@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Dirección de tu mapa del sitio para Google
+Sitemap: https://helados-sonrisas.vercel.app/sitemap.xml
