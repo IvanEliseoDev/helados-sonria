@@ -5,8 +5,6 @@ import { PremiumLineSection } from '../components/PremiumLineSection'
 import { ProductsHero } from '../components/ProductsHero'
 import { SpecialtiesSection } from '../components/SpecialtiesSection'
 import { SuperPremiumSection } from '../components/SuperPremiumSection'
-import { TakeHomeSection } from '../components/TakeHomeSection'
-
 
 export const ProductsPage = () => {
     return (
