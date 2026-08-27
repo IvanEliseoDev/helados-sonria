@@ -8,8 +8,12 @@ export class SeedService {
   constructor(private readonly eventService: EventsService) {}
 
   async executeSeed() {
+    await this.seedEvent
+    return "Semilla ejecutada exitosamente"
+  }
+
+  async seedEvent() {
     await this.eventService.removeAll()
     await this.eventService.insertMany(EVENT_DATA)
-    return "Semilla ejecutada exitosamente"
   }
 }

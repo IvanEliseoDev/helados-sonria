@@ -99,7 +99,7 @@ export class EventsService {
       console.log(error)
     const mongoError = error as MongoError;
     if(mongoError.code == 11000) throw new BadRequestException(`Evento existe en la BD ${JSON.stringify(mongoError.keyValue)}`)
-    throw new InternalServerErrorException(`Internal Server Error - Check Server Logs`)
+    throw new InternalServerErrorException(`No se lograron insertar todos los eventos - revisa los server Logs`)
     }
   }
 }

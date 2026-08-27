@@ -12,23 +12,33 @@ export class CustomersController {
     return this.customersService.create(createCustomerDto);
   }
 
+  @Post("/many")
+  createMany(@Body() createCustomerDtos: CreateCustomerDto[]) {
+    return this.customersService.insertMany(createCustomerDtos);
+  }
+
   @Get()
   findAll() {
     return this.customersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.customersService.findOne(+id);
+  @Get(':term')
+  findOne(@Param('term') term: string) {
+    return this.customersService.findOne(term);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
-    return this.customersService.update(+id, updateCustomerDto);
+  @Patch('/change-status/:term')
+  changeStatus(@Param('term') term: string, ) {
+    return this.customersService.toggleActiveStatus(term);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.customersService.remove(+id);
+  @Patch(':term')
+  update(@Param('term') term: string, @Body() updateCustomerDto: UpdateCustomerDto) {
+    return this.customersService.update(term, updateCustomerDto);
+  }
+
+  @Delete(':term')
+  remove(@Param('term') term: string) {
+    return this.customersService.remove(term);
   }
 }

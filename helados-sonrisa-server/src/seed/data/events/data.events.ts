@@ -1,5 +1,4 @@
 import { CreateEventDto } from "src/events/dto/create-event.dto";
-import { Event } from "src/events/entities/event.entity";
 import { EventType } from "src/events/enums/event-type.enum";
 
 export const EVENT_DATA: (CreateEventDto & {_id: string})[] = [
