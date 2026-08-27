@@ -33,8 +33,6 @@ export const SpecialtiesSection = () => {
                 {products.map((product) => (
                     <motion.button
                         type="button"
-                        key={product.id}
-                        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                         onClick={() => navigate(`/products/detail/${product.id}`)}
                         className="group bg-white border border-[#3e1916]/10 rounded-2xl p-4 text-left shadow-sm hover:shadow-xl transition-all cursor-pointer"
                     >

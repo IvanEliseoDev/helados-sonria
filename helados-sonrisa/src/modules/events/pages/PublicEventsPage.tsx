@@ -19,35 +19,35 @@ export const PublicEventsPage = () => {
 
   // Marcas/Empresas colaboradoras con imágenes de logo
   const empresas = [
-    { 
-      id: 1, 
-      nombre: 'TELUS International El Salvador', 
+    {
+      id: 1,
+      nombre: 'TELUS International El Salvador',
       tag: 'Corporativo',
-      logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&auto=format&fit=crop&q=80' 
+      logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&auto=format&fit=crop&q=80'
     },
-    { 
-      id: 2, 
-      nombre: 'Banco Agrícola S.A.', 
+    {
+      id: 2,
+      nombre: 'Banco Agrícola S.A.',
       tag: 'Financiero',
-      logo: 'https://images.unsplash.com/photo-1516876437184-593fda40c7ce?w=300&auto=format&fit=crop&q=80' 
+      logo: 'https://images.unsplash.com/photo-1516876437184-593fda40c7ce?w=300&auto=format&fit=crop&q=80'
     },
-    { 
-      id: 3, 
-      nombre: 'Almacenes Siman Centroamérica', 
+    {
+      id: 3,
+      nombre: 'Almacenes Siman Centroamérica',
       tag: 'Retail',
-      logo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=300&auto=format&fit=crop&q=80' 
+      logo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=300&auto=format&fit=crop&q=80'
     },
-    { 
-      id: 4, 
-      nombre: 'Applaudo Software Studios', 
+    {
+      id: 4,
+      nombre: 'Applaudo Software Studios',
       tag: 'Tech',
-      logo: 'https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=300&auto=format&fit=crop&q=80' 
+      logo: 'https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=300&auto=format&fit=crop&q=80'
     },
-    { 
-      id: 5, 
-      nombre: 'Hotel Sheraton Presidente', 
+    {
+      id: 5,
+      nombre: 'Hotel Sheraton Presidente',
       tag: 'Hostelería',
-      logo: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&auto=format&fit=crop&q=80' 
+      logo: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&auto=format&fit=crop&q=80'
     },
   ]
 
@@ -95,15 +95,15 @@ export const PublicEventsPage = () => {
     },
   ]
 
-  const eventosFiltrados = filtro === 'Todos' 
-    ? eventos 
+  const eventosFiltrados = filtro === 'Todos'
+    ? eventos
     : eventos.filter(ev => ev.categoria === filtro)
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
   return (
     <div className="min-h-screen bg-[#fffcf9] text-[#3e1916] px-6 md:px-12 font-sans">
       <NavComponent />
-      
+
       {/* Estilos CSS para el scroll continuo */}
       <style>{`
         @keyframes marquee {
@@ -120,7 +120,7 @@ export const PublicEventsPage = () => {
         }
       `}</style>
 
-      <div className="max-w-[1500px] pt-20 mx-auto space-y-16">
+      <div className="max-w-[1600px] pt-20 mx-auto space-y-16">
 
         {/* ENCABEZADO EDITORIAL */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-[#3e1916]/15 pb-12">
@@ -139,7 +139,7 @@ export const PublicEventsPage = () => {
 
           {/* BOTÓN PRINCIPAL (DIRECTO A AGENDAR / SIN MODAL) */}
           <div className="flex-shrink-0">
-            <button 
+            <button
               type="button"
               onClick={() => navigate("./agendar")}
               className="w-full sm:w-auto bg-[#2b100e] hover:bg-[#35ab9f] text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer group"
@@ -151,35 +151,36 @@ export const PublicEventsPage = () => {
         </div>
 
         {/* CINTA DE EMPRESAS TARJETAS */}
-        <div className="space-y-4">
-          <div className="flex justify-between items-center text-sm uppercase font-extrabold tracking-wider text-[#555b5a]">
-            <span>Marcas que nos eligen</span>
-            <span>Alianzas</span>
+        <div className="space-y-6 py-4">
+          {/* Encabezado discreto */}
+          <div className="">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#3e1916]/50">
+              Marcas y Alianzas que Confían en Nosotros
+            </span>
           </div>
 
-          <div className="relative overflow-hidden bg-[#f4efe8] border border-[#3e1916]/10 rounded-3xl py-6 shadow-inner">
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#f4efe8] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#f4efe8] to-transparent z-10 pointer-events-none" />
+          {/* Ticker Infinito Minimalista */}
+          <div className="relative overflow-hidden py-4">
+            {/* Máscaras de degradado lateral para desvanecimiento suave */}
+            <div className="absolute left-0 top-0 bottom-0 w-24 md:w-36 bg-gradient-to-r from-[#fffcf9] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 md:w-36 bg-gradient-to-l from-[#fffcf9] to-transparent z-10 pointer-events-none" />
 
-            <div className="animate-marquee flex items-center gap-6">
+            <div className="animate-marquee flex items-center gap-12 md:gap-20">
               {[...empresas, ...empresas].map((emp, index) => (
-                <div 
+                <div
                   key={`${emp.id}-${index}`}
-                  className="w-72 bg-white border border-[#3e1916]/15 rounded-2xl p-4 shadow-sm flex items-center gap-4 flex-shrink-0 hover:border-[#35ab9f] transition-colors"
+                  className="flex items-center gap-3 flex-shrink-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer group"
                 >
-                  <img 
-                    src={emp.logo} 
+                  <img
+                    src={emp.logo}
                     alt={emp.nombre}
-                    className="w-14 h-14 rounded-xl object-cover border border-[#3e1916]/10 flex-shrink-0" 
+                    className="h-8 md:h-12 w-auto object-contain max-w-[150px]"
                   />
-                  <div className="min-w-0 flex-1">
-                    <p className="font-bold text-base text-[#2b100e] truncate" title={emp.nombre}>
+                  {emp.nombre && (
+                    <span className="font-bold text-sm md:text-base text-[#3e1916] group-hover:text-[#35ab9f] transition-colors whitespace-nowrap">
                       {emp.nombre}
-                    </p>
-                    <span className="text-xs font-extrabold uppercase tracking-wider text-[#1b7a73]">
-                      {emp.tag}
                     </span>
-                  </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -196,11 +197,10 @@ export const PublicEventsPage = () => {
               <button
                 key={cat}
                 onClick={() => setFiltro(cat)}
-                className={`px-6 py-3 rounded-full text-base font-bold transition-all cursor-pointer ${
-                  filtro === cat
+                className={`px-6 py-3 rounded-full text-base font-bold transition-all cursor-pointer ${filtro === cat
                     ? 'bg-[#2b100e] text-[#fffcf9] shadow-md'
                     : 'bg-white text-[#555b5a] border border-[#3e1916]/20 hover:border-[#2b100e] hover:text-[#2b100e]'
-                }`}
+                  }`}
               >
                 {cat}
               </button>

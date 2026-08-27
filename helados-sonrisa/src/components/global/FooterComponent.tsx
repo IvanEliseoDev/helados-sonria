@@ -3,7 +3,7 @@ import logo from "../../assets/logo-sonrisas.png"
 export const FooterComponent = () => {
     return (
         <footer className="bg-[#fffcf9] border-t border-[#3e1916]/10 pt-16 pb-10 px-6 md:px-12 lg:px-24">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 pb-12 border-b border-[#3e1916]/10">
+            <div className="max-w-[1500px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 pb-12 border-b border-[#3e1916]/10">
                 
                 {/* Branding & Redes */}
                 <div className="md:col-span-6 lg:col-span-5 space-y-5">
