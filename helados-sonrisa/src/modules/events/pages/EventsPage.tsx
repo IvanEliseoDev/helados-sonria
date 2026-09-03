@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Calendar, 
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Calendar,
   FileText,
-  CheckCircle2, 
-  Clock, 
+  CheckCircle2,
+  Clock,
   PartyPopper,
   ChevronDown,
-  ArrowRight
+  ArrowRight,
+  ArrowLeft
 } from 'lucide-react'
 import { NavComponent } from '../../../components/global/NavComponent'
+import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router'
 
 interface Evento {
   id: number
@@ -40,6 +43,8 @@ export const EventsPage = () => {
       estado: 'Confirmado',
     },
   ])
+
+  const navigate = useNavigate()
 
   const [form, setForm] = useState({
     nombre: '',
@@ -85,12 +90,27 @@ export const EventsPage = () => {
       <NavComponent />
 
       <main className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20 pt-12 space-y-16">
-        
+
         {/* SECCIÓN SUPERIOR: HERO + FORMULARIO */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* Izquierda: Información y Beneficios */}
           <div className="lg:col-span-5 space-y-8 lg:top-28">
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <button
+                type="button"
+                onClick={() => navigate('/eventos')}
+                className="inline-flex items-center gap-2 text-sm font-extrabold text-[#3e1916]/70 hover:text-[#35ab9f] transition-colors group cursor-pointer"
+              >
+                <div className=" w-8 h-8 rounded-full bg-white border border-[#3e1916]/10 flex items-center justify-center shadow-sm group-hover:border-[#35ab9f]/40 group-hover:bg-[#35ab9f]/10 transition-all">
+                  <ArrowLeft className="w-4 h-4 text-[#3e1916] group-hover:text-[#35ab9f]" />
+                </div>
+                <span>Volver a la bitacora</span>
+              </button>
+            </motion.div>
             <div className="space-y-4">
               <span className="inline-flex items-center gap-2 bg-[#fadb72]/40 text-[#3e1916] font-bold text-xs uppercase tracking-widest px-4 py-2 rounded-full border border-[#fadb72]">
                 <span>Servicio para Eventos</span>
@@ -344,13 +364,12 @@ export const EventsPage = () => {
                     </td>
                     <td className="py-4 px-4 text-center whitespace-nowrap">
                       <span
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
-                          ev.estado === 'Pendiente'
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${ev.estado === 'Pendiente'
                             ? 'bg-amber-100 text-amber-800'
                             : ev.estado === 'Revisado'
-                            ? 'bg-blue-100 text-blue-800'
-                            : 'bg-emerald-100 text-emerald-800'
-                        }`}
+                              ? 'bg-blue-100 text-blue-800'
+                              : 'bg-emerald-100 text-emerald-800'
+                          }`}
                       >
                         <Clock className="w-3.5 h-3.5" />
                         {ev.estado}

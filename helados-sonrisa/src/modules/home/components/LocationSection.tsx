@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { MapPin, Navigation, Compass } from 'lucide-react'
+import location from "../../../assets/helados-sonrisa-ubicacion.png"
 
 export const LocationSection = () => {
     return (
@@ -11,7 +12,7 @@ export const LocationSection = () => {
         >
             {/* Encabezado Principal */}
             <div className="text-center space-y-5 mb-16 max-w-3xl mx-auto">
-                
+
 
                 <h2 className="font-bricolage font-extrabold text-3xl md:text-6xl lg:text-6xl text-[#3e1916] leading-tight">
                     Nuestra <span className="text-[#35ab9f]">Ubicación</span>
@@ -24,7 +25,7 @@ export const LocationSection = () => {
 
             {/* Contenedor Principal (Tarjeta + Mapa) */}
             <div className="bg-white border-4 border-white rounded-[2.5rem] overflow-hidden shadow-2xl shadow-[#3e1916]/10 grid grid-cols-1 lg:grid-cols-12 items-stretch">
-                
+
                 {/* Detalles de la Tienda */}
                 <div className="lg:col-span-5 p-8 md:p-12 flex flex-col justify-between space-y-8 bg-gradient-to-br from-[#fffcf9] to-[#fadb72]/15">
                     <div className="space-y-6">
@@ -39,7 +40,7 @@ export const LocationSection = () => {
                         </h3>
 
                         <p className="text-[#3e1916]/85 text-base md:text-lg leading-relaxed">
-                            Estamos ubicados en una zona privileged del Paseo El Cafetalón. El lugar ideal para refrescarte después de una tarde de caminata, deportes o diversión familiar en Santa Tecla.
+                            Estamos ubicados en una zona privilegiada dentro del Complejo Deportivo El Cafetalón, a pocos pasos del parque acuático. El lugar ideal para refrescarte después de una tarde de deportes, caminata o diversión familiar en Santa Tecla.
                         </p>
 
                         {/* Bloques de Horario y Dirección */}
@@ -58,10 +59,10 @@ export const LocationSection = () => {
                     </div>
 
                     <div className="pt-4">
-                        <a 
-                            href="https://maps.google.com" 
-                            target="_blank" 
-                            rel="noreferrer" 
+                        <a
+                            href="https://maps.app.goo.gl/zuXtRYYm77NDG5Bt5"
+                            target="_blank"
+                            rel="noreferrer"
                             className="inline-flex items-center justify-center gap-3 bg-[#35ab9f] hover:bg-[#2c9187] text-white font-bold px-8 py-4.5 rounded-2xl shadow-lg shadow-[#35ab9f]/25 transition-all transform hover:-translate-y-0.5 text-base md:text-lg w-full sm:w-auto"
                         >
                             <Navigation className="w-5 h-5" />
@@ -72,10 +73,10 @@ export const LocationSection = () => {
 
                 {/* Mapa / Vista Visual */}
                 <div className="lg:col-span-7 relative min-h-[380px] lg:min-h-[500px] bg-[#3e1916]">
-                    <img 
-                        src="https://i.ibb.co/BHTxTTnV/Gemini-Generated-Image-on9qyaon9qyaon9q.png" 
-                        alt="Ubicación en el mapa de El Cafetalón" 
-                        className="w-full h-full object-cover" 
+                    <img
+                        src={location}
+                        alt="Ubicación en el mapa de El Cafetalón"
+                        className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#3e1916]/30 via-transparent to-transparent pointer-events-none" />
                 </div>

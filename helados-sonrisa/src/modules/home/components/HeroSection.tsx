@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Heart, MapPin, Utensils, IceCreamCone } from 'lucide-react'
 import { useNavigate } from 'react-router'
+import icecream from "../../../assets/helado-coco-sonrisas.jpg"
 
 export const HeroSection = () => {
     const navigate = useNavigate()
@@ -70,7 +71,7 @@ export const HeroSection = () => {
                                 <IceCreamCone className="w-5 h-5" />
                             </div>
                             <div>
-                                <p className="font-extrabold text-[#3e1916] text-sm md:text-base leading-none">+15 Sabores</p>
+                                <p className="font-extrabold text-[#3e1916] text-sm md:text-base leading-none">+20 Sabores</p>
                                 <p className="text-xs text-[#3e1916]/60">Deliciosos</p>
                             </div>
                         </div>  
@@ -93,7 +94,7 @@ export const HeroSection = () => {
                         className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-[#3e1916] z-10"
                     >
                         <img 
-                            src="https://images.unsplash.com/photo-1570197781417-0c1561081512?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                            src={icecream} 
                             alt="Helado Artesanal Sonrisa" 
                             className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" 
                         />

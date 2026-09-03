@@ -71,7 +71,7 @@ export const ProductDetail = () => {
     <div className="min-h-screen bg-[#fffcf9] text-[#3e1916] pb-24">
       <NavComponent />
 
-      <main className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20 pt-8 md:pt-12 space-y-16">
+      <main className="max-w-[1650px] mx-auto px-6 md:px-12 lg:px-14 pt-8 md:pt-12 space-y-16">
         
         {/* Botón Volver */}
         <motion.div 
@@ -83,7 +83,7 @@ export const ProductDetail = () => {
             onClick={() => navigate('/products')}
             className="inline-flex items-center gap-2 text-sm font-extrabold text-[#3e1916]/70 hover:text-[#35ab9f] transition-colors group cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-full bg-white border border-[#3e1916]/10 flex items-center justify-center shadow-sm group-hover:border-[#35ab9f]/40 group-hover:bg-[#35ab9f]/10 transition-all">
+            <div className=" w-8 h-8 rounded-full bg-white border border-[#3e1916]/10 flex items-center justify-center shadow-sm group-hover:border-[#35ab9f]/40 group-hover:bg-[#35ab9f]/10 transition-all">
               <ArrowLeft className="w-4 h-4 text-[#3e1916] group-hover:text-[#35ab9f]" />
             </div>
             <span>Volver al catálogo</span>

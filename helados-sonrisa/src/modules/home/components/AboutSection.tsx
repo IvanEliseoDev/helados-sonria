@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Target, Rocket, IceCreamCone, Heart, Sparkles, Award } from 'lucide-react'
+import boss from "../../../assets/dueños-helados-sonrisa.png"
 
 export const AboutSection = () => {
     const [activeTab, setActiveTab] = useState<'mision' | 'vision'>('mision')
@@ -11,13 +12,13 @@ export const AboutSection = () => {
             <div className="absolute top-10 left-10 w-72 h-72 bg-[#fadb72]/20 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#35ab9f]/15 rounded-full blur-3xl pointer-events-none" />
 
-            <motion.div 
+            <motion.div
                 className="max-w-[1500px] mx-auto px-6 md:px-12 relative z-10"
             >
                 {/* Encabezado Principal */}
                 <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            
-                    
+
+
                     <h2 className="font-bricolage font-extrabold text-4xl md:text-5xl lg:text-6xl text-[#3e1916] leading-tight">
                         Artesanos del Sabor <br />
                         <span className="text-[#35ab9f] underline decoration-[#fadb72] decoration-wavy decoration-4">
@@ -35,16 +36,16 @@ export const AboutSection = () => {
 
                         {/* Imagen principal */}
                         <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-[#3e1916]">
-                            <img 
-                                src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                alt="Helados artesanos en El Cafetalón" 
-                                className="w-full h-[420px] md:h-[480px] object-cover block transform hover:scale-105 transition-transform duration-700" 
+                            <img
+                                src={boss}
+                                alt="Helados artesanos en El Cafetalón"
+                                className="w-full h-[420px] md:h-[480px] object-cover block transform hover:scale-105 transition-transform duration-700"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#3e1916]/70 via-transparent to-transparent pointer-events-none" />
                         </div>
 
                         {/* Floating Badges */}
-                        <motion.div 
+                        <motion.div
                             whileHover={{ scale: 1.05 }}
                             className="absolute -bottom-6 -left-4 bg-[#e52537] text-white px-5 py-3 rounded-2xl font-bold text-sm shadow-xl border-2 border-white flex items-center gap-3"
                         >
@@ -53,11 +54,11 @@ export const AboutSection = () => {
                             </div>
                             <div>
                                 <p className="text-xs text-white/80 font-normal">Tradición desde</p>
-                                <p className="text-base font-extrabold">2010</p>
+                                <p className="text-base font-extrabold">2015</p>
                             </div>
                         </motion.div>
 
-                        <motion.div 
+                        <motion.div
                             whileHover={{ scale: 1.05 }}
                             className="absolute -top-6 -right-4 bg-white text-[#3e1916] px-5 py-3 rounded-2xl font-bold text-sm shadow-xl border border-gray-100 flex items-center gap-3 hidden sm:flex"
                         >
@@ -81,23 +82,21 @@ export const AboutSection = () => {
                                 <button
                                     type="button"
                                     onClick={() => setActiveTab('mision')}
-                                    className={`py-3 px-4 rounded-xl font-bricolage font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                                        activeTab === 'mision'
-                                            ? 'bg-[#35ab9f] text-white shadow-lg'
-                                            : 'text-white/70 hover:text-white hover:bg-white/5'
-                                    }`}
+                                    className={`py-3 px-4 rounded-xl font-bricolage font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2 cursor-pointer ${activeTab === 'mision'
+                                        ? 'bg-[#35ab9f] text-white shadow-lg'
+                                        : 'text-white/70 hover:text-white hover:bg-white/5'
+                                        }`}
                                 >
                                     <Target className="w-4 h-4" /> Nuestra Misión
                                 </button>
-                                
+
                                 <button
                                     type="button"
                                     onClick={() => setActiveTab('vision')}
-                                    className={`py-3 px-4 rounded-xl font-bricolage font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                                        activeTab === 'vision'
-                                            ? 'bg-[#35ab9f] text-white shadow-lg'
-                                            : 'text-white/70 hover:text-white hover:bg-white/5'
-                                    }`}
+                                    className={`py-3 px-4 rounded-xl font-bricolage font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2 cursor-pointer ${activeTab === 'vision'
+                                        ? 'bg-[#35ab9f] text-white shadow-lg'
+                                        : 'text-white/70 hover:text-white hover:bg-white/5'
+                                        }`}
                                 >
                                     <Rocket className="w-4 h-4" /> Nuestra Visión
                                 </button>
@@ -120,7 +119,10 @@ export const AboutSection = () => {
                                                 Crear momentos de felicidad
                                             </h3>
                                             <p className="text-white/90 text-sm md:text-base leading-relaxed">
-                                                Compartir e inspirar sonrisas brindando helados artesanales de la más alta calidad, utilizando ingredientes naturales y frescos para ofrecer a nuestros clientes una experiencia inolvidable en cada visita.
+                                                Compartir e inspirar sonrisas, brindando helados artesanales de la más
+                                                alta calidad, utilizando ingredientes naturales y frescos para ofrecer a nuestros clientes una
+                                                experiencia de sabor inolvidable. Nuestra misión es crear un espacio acogedor donde cada visita
+                                                se convierta en una aventura dulce y memorable.
                                             </p>
                                         </motion.div>
                                     ) : (
@@ -137,7 +139,9 @@ export const AboutSection = () => {
                                                 Liderar la tradición artesanal
                                             </h3>
                                             <p className="text-white/90 text-sm md:text-base leading-relaxed">
-                                                Buscamos ser referentes del auténtico helado artesanal en El Salvador, expandiendo nuestro concepto a más rincones del país manteniendo la calidez, innovación en sabores y la alegría que nos define.
+                                                Para el año 2028, consolidarnos como la marca líder de helados
+                                                artesanales en El Salvador, destacándose  por la calidad, autenticidad e innovación de nuestros
+                                                sabores naturales, llevando sonrisas y experiencias memorables a cada cliente.
                                             </p>
                                         </motion.div>
                                     )}

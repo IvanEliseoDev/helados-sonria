@@ -34,12 +34,12 @@ export const ContactSection = () => {
                 <PhoneCall className="w-6 h-6" />
               </div>
               <div>
-                <p className="text-xs text-[#3e1916]/60 uppercase font-bold tracking-wider">Llámanos o WhatsApp</p>
-                <p className="font-extrabold text-lg text-[#3e1916]">+503 2200-0000</p>
+                <p className="text-xs text-[#3e1916]/60 uppercase font-bold tracking-wider">Llamanos al</p>
+                <p className="font-extrabold text-lg text-[#3e1916]">+503 7536-0714</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#3e1916]/10 shadow-sm hover:shadow-md transition-shadow">
+            {/* <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#3e1916]/10 shadow-sm hover:shadow-md transition-shadow">
               <div className="w-12 h-12 rounded-xl bg-[#fadb72] flex items-center justify-center text-[#3e1916] shrink-0">
                 <Mail className="w-6 h-6" />
               </div>
@@ -47,7 +47,7 @@ export const ContactSection = () => {
                 <p className="text-xs text-[#3e1916]/60 uppercase font-bold tracking-wider">Correo Electrónico</p>
                 <p className="font-bold text-base md:text-lg text-[#3e1916]">hola@heladeria.sv</p>
               </div>
-            </div>
+            </div> */}
 
           </div>
         </div>
