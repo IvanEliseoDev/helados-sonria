@@ -63,7 +63,7 @@ export class CustomersService {
             { lastName: { $regex: term, $options: 'i' } },
             { email: term.toLowerCase().trim() }
           ],
-        }).select("-password -loginAttempts -lockUntil");
+        }).select(" -loginAttempts -lockUntil");
       }
       if (!customer) {
         throw new NotFoundException(`No se encontró ningún cliente con el término: "${term}"`);

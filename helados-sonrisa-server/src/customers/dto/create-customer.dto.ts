@@ -1,6 +1,8 @@
 import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 export class CreateCustomerDto {
+    id!: string
+    
     @IsString({ message: "El nombre debe ser texto" })
     @IsNotEmpty({ message: "El nombre es obligatorio" })
     firstName!: string;
@@ -10,7 +12,7 @@ export class CreateCustomerDto {
     lastName!: string;
 
     @IsEmail({}, { message: "El correo debe tener un formato válido" })
-    @IsNotEmpty({ message: "El correo es obligatorio" })
+    @IsNotEmpty({ message: "El* correo es obligatorio" })
     email!: string;
 
     @IsString({ message: "El teléfono debe ser texto" })

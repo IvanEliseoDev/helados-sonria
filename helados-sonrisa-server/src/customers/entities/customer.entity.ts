@@ -3,6 +3,8 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 @Schema({ timestamps: true })
 export class Customer {
 
+    _id!: String
+
     @Prop({
         index: true
     })
@@ -15,7 +17,7 @@ export class Customer {
 
     @Prop({
         index: true,
-        unique: true
+        unique: true,
     })
     email!: string
 
