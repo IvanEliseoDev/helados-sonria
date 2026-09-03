@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { PhoneCall, Mail, Send, MessageSquare } from 'lucide-react'
+import { PhoneCall, Send, MessageSquare } from 'lucide-react'
 import { sectionVariants } from './variants/sectionVariants'
 
 export const ContactSection = () => {
