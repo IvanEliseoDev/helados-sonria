@@ -312,7 +312,7 @@ export const EventsPage = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-[#3e1916]/10">
             <div>
               <h3 className="font-bricolage font-extrabold text-2xl text-[#3e1916]">
-                Solicitudes Registradas
+                Mis Solicitudes Registradas
               </h3>
               <p className="text-xs md:text-sm text-[#3e1916]/60">
                 Monitorea el estado actual de tus solicitudes de eventos
@@ -365,10 +365,10 @@ export const EventsPage = () => {
                     <td className="py-4 px-4 text-center whitespace-nowrap">
                       <span
                         className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${ev.estado === 'Pendiente'
-                            ? 'bg-amber-100 text-amber-800'
-                            : ev.estado === 'Revisado'
-                              ? 'bg-blue-100 text-blue-800'
-                              : 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-amber-100 text-amber-800'
+                          : ev.estado === 'Revisado'
+                            ? 'bg-blue-100 text-blue-800'
+                            : 'bg-emerald-100 text-emerald-800'
                           }`}
                       >
                         <Clock className="w-3.5 h-3.5" />
