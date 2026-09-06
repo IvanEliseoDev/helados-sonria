@@ -5,9 +5,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SeedModule } from './seed/seed.module';
 import { CustomersModule } from './customers/customers.module';
 import { AuthModule } from './auth/auth.module';
+import { ProductsModule } from './products/products.module';
+import { EmployeesModule } from './employees/employees.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost:27017/helados-sonrisa'), EventsModule, SeedModule, CustomersModule, AuthModule],
+  imports: [MongooseModule.forRoot('mongodb://localhost:27017/helados-sonrisa'), EventsModule, SeedModule, CustomersModule, AuthModule, ProductsModule, EmployeesModule],
   controllers: [],
   providers: [],
 })

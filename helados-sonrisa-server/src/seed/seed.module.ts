@@ -4,9 +4,10 @@ import { SeedController } from './seed.controller';
 import { CommonModule } from 'src/common/common.module';
 import { EventsModule } from 'src/events/events.module';
 import { CustomersModule } from 'src/customers/customers.module';
+import { ProductsModule } from 'src/products/products.module';
 
 @Module({
-  imports: [CommonModule, EventsModule, CustomersModule],
+  imports: [CommonModule, EventsModule, CustomersModule, ProductsModule],
   controllers: [SeedController],
   providers: [SeedService],
 })
