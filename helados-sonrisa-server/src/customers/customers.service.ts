@@ -7,24 +7,30 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ApiResponse } from 'src/utils/api.response';
 import * as bcrypt from 'bcrypt';
 import { handleDBException } from 'src/utils/handle-exceptions.util';
+import { Employee } from 'src/employees/entities/employee.entity';
 
 @Injectable()
 export class CustomersService {
 
   constructor(
-    @InjectModel(Customer.name) private readonly customerModel: Model<Customer>
-  ) {}
+    @InjectModel(Customer.name) private readonly customerModel: Model<Customer>,
+    @InjectModel(Employee.name) private readonly employeeModel: Model<Employee>
+  ) { }
 
   async create(createCustomerDto: CreateCustomerDto) {
     try {
-      const { password } = createCustomerDto;
+      const { email, password } = createCustomerDto;
+      const isExistEmail = await this.employeeModel.findOne({ email })
+      if (isExistEmail) return new ApiResponse("Este correo ya ha sido utilizado", 400, null)
+      const isExistCustomer = await this.customerModel.findOne({ email })
+      if (isExistCustomer) return new ApiResponse("Este correo ya ha sido utilizado", 400, null)
       const hashedPassword = await bcrypt.hash(password, 10);
       const newCustomer = await this.customerModel.create({
         ...createCustomerDto,
         password: hashedPassword,
-        isActive: true
+        isActive: true,
       });
-      
+
       const customerObj = newCustomer.toObject();
       delete (customerObj as any).password;
       return new ApiResponse("Cliente creado exitosamente", 201, customerObj);
@@ -63,7 +69,7 @@ export class CustomersService {
             { lastName: { $regex: term, $options: 'i' } },
             { email: term.toLowerCase().trim() }
           ],
-        }).select(" -loginAttempts -lockUntil");
+        }).select('-password -loginAttempts -lockUntil');
       }
       if (!customer) {
         throw new NotFoundException(`No se encontró ningún cliente con el término: "${term}"`);
@@ -82,7 +88,6 @@ export class CustomersService {
       const updatedCustomer = await this.customerModel
         .findOneAndUpdate(filter, updateData, { new: true })
         .select("-password -loginAttempts -lockUntil");
-
       if (!updatedCustomer) {
         throw new NotFoundException(`No se encontró ningún cliente con el término: "${term}"`);
       }
@@ -117,16 +122,13 @@ export class CustomersService {
   async toggleActiveStatus(term: string) {
     try {
       const filter = isValidObjectId(term) ? { _id: term } : { email: term.toLowerCase().trim() };
-      
       const customer = await this.customerModel.findOne(filter);
       if (!customer) {
         throw new NotFoundException(`No se encontró el cliente con el término: "${term}"`);
       }
-
       // Invierte el estado actual del cliente (true -> false / false -> true)
       customer.isActive = !customer.isActive;
       await customer.save();
-
       const message = customer.isActive ? "Cliente activado exitosamente" : "Cliente desactivado exitosamente";
       return new ApiResponse(message, 200, { id: customer._id, isActive: customer.isActive });
     } catch (error) {
@@ -172,4 +174,27 @@ export class CustomersService {
       handleDBException(error, CustomersService.name);
     }
   }
+
+  //*Metodo exclusivo para el login
+  async findByEmailForAuth(email: string) {
+    try {
+      return await this.customerModel
+        .findOne({ email: email.toLowerCase().trim() })
+        .select('+password'); // Asegura incluir el password para la validación
+    } catch (error) {
+      handleDBException(error, CustomersService.name);
+    }
+  }
+
+  //*Metodo exclusivo para me
+  async findByEmailForMe(email: string) {
+    try {
+      return await this.customerModel
+        .findOne({ email: email.toLowerCase().trim() })
+        .select('-password'); 
+    } catch (error) {
+      handleDBException(error, CustomersService.name);
+    }
+  }
 }
+

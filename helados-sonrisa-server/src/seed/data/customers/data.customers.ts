@@ -2,7 +2,7 @@ import { CreateCustomerDto } from "src/customers/dto/create-customer.dto";
 
 export const DATA_CUSTOMERS: (CreateCustomerDto & { _id?: string })[] = [
     {
-        id: "",
+        _id: '65f1a2b3c4d5e6f7a8b91111',
         firstName: "Carlos",
         lastName: "Mendoza",
         email: "carlos.mendoza@example.com",
@@ -10,7 +10,7 @@ export const DATA_CUSTOMERS: (CreateCustomerDto & { _id?: string })[] = [
         password: "Password123",
     },
     {
-        id: "",
+        _id: '65f1a2b3c4d5e6f7a8b92222',
         firstName: "María",
         lastName: "Gómez",
         email: "maria.gomez@example.com",
@@ -18,7 +18,7 @@ export const DATA_CUSTOMERS: (CreateCustomerDto & { _id?: string })[] = [
         password: "Password123!",
     },
     {
-        id: "",
+        _id: '65f1a2b3c4d5e6f7a8b93333',
         firstName: "Alejandro",
         lastName: "Rivas",
         email: "alejandro.rivas@example.com",

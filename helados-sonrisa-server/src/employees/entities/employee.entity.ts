@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import request from 'supertest';
 
 @Schema({timestamps: true})
 export class Employee {
@@ -18,7 +17,8 @@ export class Employee {
 
     @Prop({
         index: true,
-        required: true
+        required: true,
+        unique: true
     })
     email!: string
 

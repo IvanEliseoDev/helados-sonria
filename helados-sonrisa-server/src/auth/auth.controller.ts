@@ -11,8 +11,9 @@ export class AuthController {
 
   @Get('/me')
   @UseGuards(AuthGuard('jwt'))
-  async getMe(@GetUser('userId') userId:{userId: string, email:string, role:string}){
-    return this.authService.me(userId)
+  async getMe(@GetUser() userPayload: { id: string; email: string; role: string }) {
+    // Pasamos todo el payload limpio al servicio
+    return this.authService.me(userPayload);
   }
 
   @Post("/login")

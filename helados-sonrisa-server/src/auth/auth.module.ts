@@ -4,6 +4,7 @@ import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { CustomersModule } from 'src/customers/customers.module';
+import { EmployeesModule } from 'src/employees/employees.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { CustomersModule } from 'src/customers/customers.module';
       secret: "helados_sonrisa_secret_key_0110101",
       signOptions: {expiresIn: '25d'} //? El token expira en 25 dias
     }),
-    CustomersModule
+    CustomersModule,
+    EmployeesModule
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

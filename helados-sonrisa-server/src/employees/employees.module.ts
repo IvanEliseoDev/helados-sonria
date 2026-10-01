@@ -2,17 +2,23 @@ import { Module } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
 import { EmployeesController } from './employees.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import {  employeeSchema } from './entities/employee.entity';
+import { Employee, employeeSchema } from './entities/employee.entity';
+import { MailModule } from 'src/mail/mail.module';
+import { Customer, customerSchema } from 'src/customers/entities/customer.entity';
 
 @Module({
   controllers: [EmployeesController],
   providers: [EmployeesService],
   imports: [MongooseModule.forFeature([
     {
-      name: EmployeesService.name,
+      name: Employee.name,
       schema: employeeSchema
-    }
-  ])],
-  exports:[EmployeesService]
+    },
+    {
+      name: Customer.name, // Registramos Customer para que se pueda inyectar en EmployeesService
+      schema: customerSchema,
+    },
+  ]), MailModule],
+  exports: [EmployeesService]
 })
 export class EmployeesModule { }

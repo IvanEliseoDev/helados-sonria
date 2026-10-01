@@ -1,7 +1,9 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
 
 export class CreateCustomerDto {
-    id!: string
+    
+    @IsOptional()
+    _id?: string
     
     @IsString({ message: "El nombre debe ser texto" })
     @IsNotEmpty({ message: "El nombre es obligatorio" })

@@ -22,6 +22,11 @@ export class EmployeesController {
     return this.employeesService.findOne(term);
   }
 
+  @Patch('/change-status/:term')
+  changeStatus(@Param('term') term: string) {
+    return this.employeesService.toggleActiveStatus(term);
+  }
+
   @Patch(':term')
   update(@Param('term') term: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
     return this.employeesService.update(term, updateEmployeeDto);
