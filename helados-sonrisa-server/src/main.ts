@@ -16,9 +16,13 @@ async function bootstrap() {
     }
   }))
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173' || "https://helados-sonrisas.vercel.app/",
-    credentials: true //! Permitir envío de cookies
-  })
+    origin: [
+      'http://localhost:5173',
+      'https://helados-sonrisas.vercel.app',
+      process.env.FRONTEND_URL,
+    ].filter(Boolean), // Elimina valores undefined/null en caso de que FRONTEND_URL no esté definida
+    credentials: true,
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }
