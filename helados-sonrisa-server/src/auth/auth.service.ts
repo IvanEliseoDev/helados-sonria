@@ -66,7 +66,8 @@ export class AuthService {
       //! Configurar la Cookie en la respuesta Express
       res.cookie('access_cookie', token, {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'none',
+        secure: true, // Obligatorio cuando sameSite es 'none'
         maxAge: 25 * 24 * 60 * 60 * 1000, // 25 días
       });
       return res.status(200).json(
@@ -117,7 +118,8 @@ export class AuthService {
       // Para borrar la cookie, debemos pasar exactamente la misma clave y opciones
       res.clearCookie('access_cookie', {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'none',
+        secure: true,
       });
 
       return new ApiResponse("Sesión cerrada exitosamente", 200, null);
