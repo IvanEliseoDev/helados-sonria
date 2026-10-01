@@ -1,4 +1,5 @@
 import { menuData } from './MenuMock'
+import heladosPremiumImg from '../../../assets/helados/heladospremium/Helados premium.png';
 
 export interface Producto {
   id: string
@@ -6,9 +7,9 @@ export interface Producto {
   categoria: string
   descripcion: string
   presentaciones?: string[]
+  imagen?:         string
   disponibilidad?: string
 }
-
 export const todosLosProductos: Producto[] = [
   ...menuData.menu.helados,
   ...menuData.menu.sundaes,
@@ -17,27 +18,20 @@ export const todosLosProductos: Producto[] = [
   ...menuData.menu.minutas_saladas,
   ...menuData.menu.to_go,
   ...menuData.menu.sabores_especiales,
-]
+];
 
-const imagenesPorTipo: Record<string, string> = {
-  HEL: '',
-  SUN: '',
-  SOR: '',
-  MIN: '',
-  TOG: '',
-  ESP: '',
-}
-
+// Actualizamos la función para que devuelva la imagen que trae el objeto producto
 export const obtenerImagenProducto = (id: string) => {
-  return imagenesPorTipo[id.split('-')[0]] ?? imagenesPorTipo.HEL
-}
+  const producto = obtenerProducto(id);
+  return producto?.imagen || heladosPremiumImg; // Imagen por defecto en caso de que no tenga
+};
 
 export const obtenerProducto = (id?: string) => {
-  return todosLosProductos.find((producto) => producto.id === id)
-}
+  return todosLosProductos.find((producto) => producto.id === id);
+};
 
 export const obtenerRecomendaciones = (producto: Producto) => {
   return todosLosProductos
     .filter((item) => item.id !== producto.id && item.categoria === producto.categoria)
-    .slice(0, 4)
-}
+    .slice(0, 4);
+};

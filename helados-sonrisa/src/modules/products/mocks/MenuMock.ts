@@ -1,3 +1,44 @@
+// Importaciones de imágenes desde la carpeta assets/helados
+import heladosPremiumImg from '../../../assets/helados/heladospremium/Helados premium.png';
+import superPremiumImg from '../../../assets/helados/heladossuperpremium/Super Premium.png';
+
+// Minutas
+import minutaCafe from '../../../assets/helados/minutas/Minuta de cafe.png';
+import minutaLimon from '../../../assets/helados/minutas/Minuta de limon.png';
+import minutaPlaya from '../../../assets/helados/minutas/Minuta de playa.png';
+import minutaTamarindo from '../../../assets/helados/minutas/Minuta de tamarindo.png';
+import minutaMichelada from '../../../assets/helados/minutas/Minuta Michelada.png';
+import minutaPicaFresa from '../../../assets/helados/minutas/Minuta pica fresa.png';
+import minutaTradicional from '../../../assets/helados/minutas/Minuta tradicional.png';
+import minutaUnicornio from '../../../assets/helados/minutas/Minuta unicornio.png';
+import minutaFresaCrema from '../../../assets/helados/minutas/Minutas de fresa y crema chantilly.png';
+
+
+//Helados
+import heladoDeHorchata from "../../../assets/helados/helados/HeladoHorchata.jpg"
+import heladoBlueBerry from "../../../assets/helados/helados/HeladoBlueberry.jpg"
+import heladoDeLecheConOreo from "../../../assets/helados/helados/HeladoLecheConOreo.jpg"
+import heladoDeCoco from "../../../assets/helados/helados/HeladoDeCoco.jpg"
+import heladoDeFresa from "../../../assets/helados/helados/HeladoDeFresa.jpg"
+import heladoDeTamarindo from "../../../assets/helados/helados/HeladoDeTamarindo.jpg"
+import heladoDeArrayan from "../../../assets/helados/helados/HeladoDeArrayan.jpg"
+import heladoDeMango from "../../../assets/helados/helados/HeladoDeMango.jpg"
+
+//Sundae 
+import sundaeDeOreo from "../../../assets/helados/sundaes/SundaeDeOreo.jpg"
+import sundaeDeCarcajada from "../../../assets/helados/sundaes/SundaeCarcajeada.jpg"
+import sundaeDeTamarindo from "../../../assets/helados/sundaes/sundaeDeTamarindo.jpg"
+
+export interface Producto {
+    id: string;
+    nombre: string;
+    categoria: string;
+    descripcion: string;
+    presentaciones?: string[];
+    disponibilidad?: string;
+    imagen?: string; // <-- Añadimos la propiedad opcional de imagen
+}
+
 export const menuData = {
   "menu": {
     "helados": [
@@ -5,57 +46,65 @@ export const menuData = {
         "id": "HEL-001",
         "nombre": "Helado de Tamarindo",
         "categoria": "Premium",
-        "descripcion": "Helado artesanal de sabor a tamarindo, preparado para ofrecer una textura suave y cremosa y un sabor frutal refrescante.",
-        "presentaciones": ["Sencillo", "Doble"]
+        "descripcion": "Helado artesanal de sabor a tamarindo...",
+        "presentaciones": ["Sencillo", "Doble"],
+        "imagen": heladoDeTamarindo
       },
       {
         "id": "HEL-002",
         "nombre": "Helado de Fresa",
         "categoria": "Premium",
-        "descripcion": "Helado artesanal de fresa con una textura cremosa y un sabor dulce y frutal que lo convierte en una opción refrescante.",
-        "presentaciones": ["Sencillo", "Doble"]
+        "descripcion": "Helado artesanal de fresa...",
+        "presentaciones": ["Sencillo", "Doble"],
+        "imagen": heladoDeFresa
       },
       {
         "id": "HEL-003",
         "nombre": "Helado de Coco",
         "categoria": "Premium",
-        "descripcion": "Helado artesanal de coco, suave y cremoso, con el característico sabor tropical del coco.",
-        "presentaciones": ["Sencillo", "Doble"]
+        "descripcion": "Helado artesanal de coco...",
+        "presentaciones": ["Sencillo", "Doble"],
+        "imagen": heladoDeCoco
       },
       {
         "id": "HEL-004",
         "nombre": "Helado de Mango",
         "categoria": "Premium",
-        "descripcion": "Helado artesanal de mango con una textura cremosa y un sabor frutal tropical, ideal para disfrutar bien frío.",
-        "presentaciones": ["Sencillo", "Doble"]
+        "descripcion": "Helado artesanal de mango...",
+        "presentaciones": ["Sencillo", "Doble"],
+        "imagen": heladoDeMango
       },
       {
         "id": "HEL-005",
         "nombre": "Helado de Arrayán",
         "categoria": "Premium",
-        "descripcion": "Helado artesanal de arrayán con una textura suave y cremosa, pensado para quienes buscan un sabor frutal tradicional y diferente.",
-        "presentaciones": ["Sencillo", "Doble"]
+        "descripcion": "Helado artesanal de arrayán...",
+        "presentaciones": ["Sencillo", "Doble"],
+        "imagen": heladoDeArrayan
       },
       {
         "id": "HEL-006",
         "nombre": "Helado de Horchata",
         "categoria": "Súper Premium",
-        "descripcion": "Helado artesanal inspirado en la tradicional horchata, con una textura cremosa y un sabor dulce y característico.",
-        "presentaciones": ["Sencillo", "Doble"]
+        "descripcion": "Helado artesanal inspirado en la tradicional horchata...",
+        "presentaciones": ["Sencillo", "Doble"],
+        "imagen": heladoDeHorchata
       },
       {
         "id": "HEL-007",
         "nombre": "Helado de Blueberry",
         "categoria": "Súper Premium",
-        "descripcion": "Helado artesanal de blueberry con una textura suave y cremosa y un sabor frutal distintivo.",
-        "presentaciones": ["Sencillo", "Doble"]
+        "descripcion": "Helado artesanal de blueberry...",
+        "presentaciones": ["Sencillo", "Doble"],
+        "imagen": heladoBlueBerry
       },
       {
         "id": "HEL-008",
         "nombre": "Helado de Leche con Oreo",
         "categoria": "Súper Premium",
-        "descripcion": "Helado artesanal de leche con Oreo que combina una base cremosa con el característico sabor de las galletas Oreo.",
-        "presentaciones": ["Sencillo", "Doble"]
+        "descripcion": "Helado artesanal de leche con Oreo...",
+        "presentaciones": ["Sencillo", "Doble"],
+        "imagen": heladoDeLecheConOreo
       }
     ],
 
@@ -64,19 +113,22 @@ export const menuData = {
         "id": "SUN-001",
         "nombre": "Sundae de Oreo",
         "categoria": "Sundae",
-        "descripcion": "Una combinación de helado artesanal con Oreo, acompañada de toppings y una presentación dulce y llamativa."
+        "descripcion": "Una combinación de helado artesanal con Oreo...",
+        "imagen": sundaeDeOreo // O la imagen que corresponda
       },
       {
         "id": "SUN-002",
         "nombre": "Sundae de Cocada",
         "categoria": "Sundae",
-        "descripcion": "Sundae de sabor cocada preparado con helado artesanal, toppings y una presentación pensada para disfrutar diferentes texturas y sabores."
+        "descripcion": "Sundae de sabor cocada...",
+        "imagen": sundaeDeCarcajada
       },
       {
         "id": "SUN-003",
         "nombre": "Sundae de Tamarindo",
         "categoria": "Sundae",
-        "descripcion": "Sundae de tamarindo que combina el sabor frutal del helado con toppings y una presentación especial."
+        "descripcion": "Sundae de tamarindo...",
+        "imagen": sundaeDeTamarindo
       }
     ],
 
@@ -85,7 +137,8 @@ export const menuData = {
         "id": "SOR-001",
         "nombre": "Sorbemangoneada",
         "categoria": "Sorbemangoneada",
-        "descripcion": "Una especialidad de Helados Sonrisa que combina sorbete artesanal con ingredientes frutales y toppings. Su presentación especial incluye cuatro bolitas de sorbete para una experiencia refrescante y diferente."
+        "descripcion": "Una especialidad de Helados Sonrisa...",
+        "imagen": heladosPremiumImg
       }
     ],
 
@@ -94,31 +147,36 @@ export const menuData = {
         "id": "MIN-D-001",
         "nombre": "Minuta Café",
         "categoria": "Minuta Dulce",
-        "descripcion": "Minuta de hielo finamente raspado con sabor a café, acompañada de jarabes y complementos para crear un postre refrescante y dulce."
+        "descripcion": "Minuta de hielo finamente raspado con sabor a café...",
+        "imagen": minutaCafe
       },
       {
         "id": "MIN-D-002",
         "nombre": "Minuta Playa",
         "categoria": "Minuta Dulce",
-        "descripcion": "Minuta refrescante de estilo dulce, preparada con hielo raspado fino, jarabes y complementos que crean una combinación colorida y agradable."
+        "descripcion": "Minuta refrescante de estilo dulce...",
+        "imagen": minutaPlaya
       },
       {
         "id": "MIN-D-003",
         "nombre": "Minuta Tradicional",
         "categoria": "Minuta Dulce",
-        "descripcion": "Una minuta de estilo tradicional salvadoreño preparada con hielo raspado, jarabes y complementos dulces para disfrutar una combinación clásica y refrescante."
+        "descripcion": "Una minuta de estilo tradicional salvadoreño...",
+        "imagen": minutaTradicional
       },
       {
         "id": "MIN-D-004",
         "nombre": "Minuta Unicornio",
         "categoria": "Minuta Dulce",
-        "descripcion": "Minuta dulce de presentación llamativa, preparada con hielo raspado, jarabes y toppings para una experiencia colorida y divertida."
+        "descripcion": "Minuta dulce de presentación llamativa...",
+        "imagen": minutaUnicornio
       },
       {
         "id": "MIN-D-005",
         "nombre": "Minuta Fresa con Crema",
         "categoria": "Minuta Dulce",
-        "descripcion": "Minuta de hielo raspado combinada con fresa y crema, creando un contraste dulce, suave y refrescante."
+        "descripcion": "Minuta de hielo raspado combinada con fresa y crema...",
+        "imagen": minutaFresaCrema
       }
     ],
 
@@ -127,25 +185,29 @@ export const menuData = {
         "id": "MIN-S-001",
         "nombre": "Minuta Limón",
         "categoria": "Minuta Salada",
-        "descripcion": "Minuta refrescante de limón preparada con hielo raspado y una combinación de sabores cítricos para quienes prefieren un toque ácido."
+        "descripcion": "Minuta refrescante de limón...",
+        "imagen": minutaLimon
       },
       {
         "id": "MIN-S-002",
         "nombre": "Minuta Pica Fresa",
         "categoria": "Minuta Salada",
-        "descripcion": "Minuta que combina el sabor frutal de la fresa con un toque picante y ácido, creando una experiencia intensa y refrescante."
+        "descripcion": "Minuta que combina el sabor frutal de la fresa...",
+        "imagen": minutaPicaFresa
       },
       {
         "id": "MIN-S-003",
         "nombre": "Minuta Michelada",
         "categoria": "Minuta Salada",
-        "descripcion": "Minuta de perfil ácido y especiado, preparada con hielo raspado y una combinación de sabores inspirada en la tradicional michelada."
+        "descripcion": "Minuta de perfil ácido y especiado...",
+        "imagen": minutaMichelada
       },
       {
         "id": "MIN-S-004",
         "nombre": "Minuta Tamarindo",
         "categoria": "Minuta Salada",
-        "descripcion": "Minuta refrescante de tamarindo con un perfil ácido y frutal, preparada sobre hielo raspado y complementada con sus ingredientes característicos."
+        "descripcion": "Minuta refrescante de tamarindo...",
+        "imagen": minutaTamarindo
       }
     ],
 
@@ -154,12 +216,9 @@ export const menuData = {
         "id": "TOG-001",
         "nombre": "Helado To-Go",
         "categoria": "To-Go",
-        "descripcion": "Nuestros helados artesanales para disfrutar en casa o compartir, disponibles en diferentes tamaños para adaptarse a cada ocasión.",
-        "presentaciones": [
-          "Pinta",
-          "Litro",
-          "Medio galón"
-        ]
+        "descripcion": "Nuestros helados artesanales para disfrutar en casa...",
+        "presentaciones": ["Pinta", "Litro", "Medio galón"],
+        "imagen": superPremiumImg
       }
     ],
 
@@ -168,16 +227,18 @@ export const menuData = {
         "id": "ESP-001",
         "nombre": "Jocote en Miel",
         "categoria": "Sabor Especial",
-        "descripcion": "Sabor especial inspirado en el tradicional jocote en miel salvadoreño, creado como una propuesta artesanal para eventos y temporadas especiales.",
-        "disponibilidad": "Temporada / eventos"
+        "descripcion": "Sabor especial inspirado en el tradicional jocote en miel...",
+        "disponibilidad": "Temporada / eventos",
+        "imagen": heladosPremiumImg
       },
       {
         "id": "ESP-002",
         "nombre": "Candy Cane",
         "categoria": "Sabor Especial",
-        "descripcion": "Sabor especial de temporada inspirado en el tradicional bastón de dulce, creado como una propuesta temática para la época navideña.",
-        "disponibilidad": "Temporada navideña"
+        "descripcion": "Sabor especial de temporada...",
+        "disponibilidad": "Temporada navideña",
+        "imagen": superPremiumImg
       }
     ]
   }
-}
+};
