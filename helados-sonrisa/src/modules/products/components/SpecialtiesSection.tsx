@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Heart, Sparkles } from 'lucide-react'
+import { ArrowRight, Heart } from 'lucide-react'
 import { useNavigate } from 'react-router'
 import { menuData } from '../mocks/MenuMock'
 import { obtenerImagenProducto } from '../mocks/productCatalog'
