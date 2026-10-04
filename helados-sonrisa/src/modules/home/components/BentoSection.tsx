@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion'
 import { Sparkles, Flame, Heart, Sun, ArrowUpRight } from 'lucide-react'
 
+import heladosArtesanales from "../../../assets/images/helados-artesanales.png"
+import sundaesEspeciales from "../../../assets/images/SundaesEspeciales.png"
+import sorbeMangoneadas from "../../../assets/images/sorbemangoneadas.png"
+import minutasSaladasyDulces from "../../../assets/images/minutassaladasydulces.png"
+
 export const BentoSection = () => {
   return (
     <motion.section 
@@ -28,7 +33,7 @@ export const BentoSection = () => {
           className="md:col-span-2 relative rounded-3xl overflow-hidden shadow-xl border-4 border-white group bg-[#3e1916]"
         >
           <img 
-            src="https://i.ibb.co/8Dbv9sK0/image.png" 
+            src={heladosArtesanales} 
             alt="Helados Artesanales" 
             className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
           />
@@ -57,7 +62,7 @@ export const BentoSection = () => {
           className="md:row-span-2 relative rounded-3xl overflow-hidden shadow-xl border-4 border-white group bg-[#3e1916]"
         >
           <img 
-            src="https://i.ibb.co/N6yWp3S3/image.png" 
+            src={sundaesEspeciales} 
             alt="Sundaes Especiales" 
             className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
           />
@@ -79,7 +84,7 @@ export const BentoSection = () => {
           className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white group bg-[#3e1916]"
         >
           <img 
-            src="https://i.ibb.co/7tmFmrJ4/image.png" 
+            src={sorbeMangoneadas}
             alt="Sorbemangoneada" 
             className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
           />
@@ -101,7 +106,7 @@ export const BentoSection = () => {
           className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white group bg-[#3e1916]"
         >
           <img 
-            src="https://i.ibb.co/9mX1vcM3/image.png" 
+            src={minutasSaladasyDulces}
             alt="Minutas Dulces y Saladas" 
             className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
           />
