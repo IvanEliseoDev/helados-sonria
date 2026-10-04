@@ -1,6 +1,7 @@
 
 import { FooterComponent } from '../../../components/global/FooterComponent'
 import { NavComponent } from '../../../components/global/NavComponent'
+import { WhatsAppButton } from '../../../components/global/WhatsAppButton'
 import { PremiumLineSection } from '../components/PremiumLineSection'
 import { ProductsHero } from '../components/ProductsHero'
 import { SpecialtiesSection } from '../components/SpecialtiesSection'
@@ -21,6 +22,7 @@ export const ProductsPage = () => {
                 <SpecialtiesSection />
                 <FooterComponent />
             </main>
+            <WhatsAppButton />
         </div>
     )
 }

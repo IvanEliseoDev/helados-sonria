@@ -5,9 +5,11 @@ import { AboutSection } from '../components/AboutSection';
 import { HeroSection } from '../components/HeroSection';
 import { NavComponent } from '../../../components/global/NavComponent';
 import { FooterComponent } from '../../../components/global/FooterComponent';
+import { WhatsAppButton } from '../../../components/global/WhatsAppButton';
 
 
 export const HeladosSonrisaLanding = () => {
+
   return (
     <div className="min-h-screen bg-[#fffcf9] font-['Poppins',sans-serif] text-[#2b100e] overflow-x-clip selection:bg-[#35ab9f] selection:text-white">
       
@@ -31,6 +33,7 @@ export const HeladosSonrisaLanding = () => {
       {/* 7. FOOTER */}
       <FooterComponent />
 
+      <WhatsAppButton />
     </div>
   );
 }

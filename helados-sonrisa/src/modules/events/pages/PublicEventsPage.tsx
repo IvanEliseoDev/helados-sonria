@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NavComponent } from '../../../components/global/NavComponent'
 import { ArrowRight, MapPin, Users, Calendar } from 'lucide-react'
 import { useNavigate } from 'react-router'
+import { WhatsAppButton } from '../../../components/global/WhatsAppButton'
 
 interface EventoPasado {
   id: number
@@ -267,6 +268,8 @@ export const PublicEventsPage = () => {
         </div>
 
       </div>
+
+      <WhatsAppButton />
     </div>
   )
 }

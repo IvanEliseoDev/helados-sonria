@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 import { useLocation, useNavigate } from "react-router"
-import { Menu, X, User, LogOut, LogIn } from "lucide-react"
+import { Menu, X, User, LogOut } from "lucide-react"
 import logo from "../../assets/logo-sonrisas.png"
 import { useAuthStore } from "../../auth/store/auth.store"
 import { useAuth } from "../../auth/hooks/useAuthMutate"
@@ -190,16 +190,8 @@ export const NavComponent = () => {
                     <button type="button" onClick={() => navigateToSection('contacto')} className={getLinkStyle('contacto')}>Contacto</button>
 
                     {/* Menú de Usuario Desktop (Solo si está autenticado) */}
-                    {isAuthenticated ? (
+                    {isAuthenticated && (
                         <UserProfileMenu />
-                    ) : (
-                        <button
-                            type="button"
-                            onClick={() => handlePageNavigation('/auth/login')}
-                            className="bg-[#35ab9f] hover:bg-[#2e968b] text-white px-5 py-2.5 rounded-xl font-bold transition-all cursor-pointer shadow-sm"
-                        >
-                            Iniciar Sesión
-                        </button>
                     )}
                 </nav>
 
@@ -225,7 +217,7 @@ export const NavComponent = () => {
                     
                     {/* Opciones de Usuario en Móvil */}
                     <div className="pt-2 mt-2 border-t border-[#3e1916]/10 space-y-1">
-                        {isAuthenticated ? (
+                        {isAuthenticated && (
                             <>
                                 <button 
                                     type="button" 
@@ -244,15 +236,6 @@ export const NavComponent = () => {
                                     Cerrar Sesión
                                 </button>
                             </>
-                        ) : (
-                            <button 
-                                type="button" 
-                                onClick={() => handlePageNavigation('/auth/login')} 
-                                className="w-full text-left py-3 px-4 rounded-xl font-bold text-base text-[#35ab9f] hover:bg-[#35ab9f]/10 flex items-center gap-3 transition-colors cursor-pointer"
-                            >
-                                <LogIn className="w-5 h-5 text-[#35ab9f]" />
-                                Iniciar Sesión
-                            </button>
                         )}
                     </div>
                 </div>

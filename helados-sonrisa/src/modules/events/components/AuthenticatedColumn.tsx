@@ -61,6 +61,7 @@ export const AuthenticatedColumn = () => {
                 <button 
                     type="button"
                     className="cursor-pointer w-full py-3.5 px-6 bg-red-50 text-red-600 font-semibold rounded-2xl border border-red-100 hover:bg-red-100 active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2"
+                    onClick={() => navigate("/auth/register")}
                 >
                     <UserPlus className="w-5 h-5" />
                     Registrarse
