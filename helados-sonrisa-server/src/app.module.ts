@@ -1,8 +1,5 @@
 import * as dns from 'node:dns';
-// Parche de DNS global para evitar errores ECONNREFUSED con MongoDB Atlas
-
 dns.setServers(['8.8.8.8', '1.1.1.1']);
-
 
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
