@@ -5,6 +5,8 @@ export const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
     .default('development'),
+  DATABASE_URL: z.string().url(),
+  JWT_SECRET: z.string().min(32),
   FRONTEND_URL: z.string().url().default('http://localhost:5173'),
 
   MAIL_HOST: z.string({ message: 'MAIL_HOST es requerido' }),

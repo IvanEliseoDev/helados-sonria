@@ -30,10 +30,7 @@ import { validateEnv } from './config/config';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        // Puedes cambiar esto por una variable de entorno en tu .env (ej. DATABASE_URL)
-        const uri =
-          configService.get<string>('DATABASE_URL') ||
-          'mongodb+srv://cvcg11:t1j5NPukgKeDl73a@cluster0.fager59.mongodb.net/helados-sonrisa';
+        const uri = configService.getOrThrow<string>('DATABASE_URL');
         return {
           uri,
         };

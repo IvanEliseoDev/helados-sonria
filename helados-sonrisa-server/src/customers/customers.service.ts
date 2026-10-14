@@ -32,8 +32,10 @@ export class CustomersService {
         isActive: true,
       });
 
-      const customerObj = newCustomer.toObject();
-      delete (customerObj as any).password;
+      const customerObj = {
+        ...newCustomer.toObject(),
+      } as Record<string, unknown>;
+      delete customerObj.password;
       return new ApiResponse('Cliente creado exitosamente', 201, customerObj);
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
@@ -90,7 +92,9 @@ export class CustomersService {
 
   async update(term: string, updateCustomerDto: UpdateCustomerDto) {
     try {
-      const { password, email, ...updateData } = updateCustomerDto;
+      const updateData = { ...updateCustomerDto };
+      delete updateData.password;
+      delete updateData.email;
       const filter = isValidObjectId(term)
         ? { _id: term }
         : { email: term.toLowerCase().trim() };

@@ -200,7 +200,11 @@ export class EventsService {
     }
   }
 
-  async findCustomerMeEvent(userPayload: any) {
+  async findCustomerMeEvent(userPayload: {
+    id?: string;
+    userId?: string;
+    sub?: string;
+  }) {
     try {
       if (!userPayload) {
         return new ApiResponse('Usuario no encontrado', 401, null);

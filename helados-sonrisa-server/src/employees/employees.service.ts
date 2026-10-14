@@ -37,11 +37,13 @@ export class EmployeesService {
         isActive: true,
       });
 
-      const employeeObj = newEmployee.toObject();
-      delete (employeeObj as any).password;
+      const employeeObj = {
+        ...newEmployee.toObject(),
+      } as Record<string, unknown>;
+      delete employeeObj.password;
 
       //*. Disparar el envío de correo (No usamos 'await' si no queremos que la latencia del correo bloquee la respuesta HTTP)
-      this.mailService.registerNewEmployeeMail(email, firstName, password);
+      void this.mailService.registerNewEmployeeMail(email, firstName, password);
       return new ApiResponse('Empleado creado exitosamente', 201, employeeObj);
     } catch (error) {
       if (error instanceof NotFoundException) throw error;

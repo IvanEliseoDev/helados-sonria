@@ -95,12 +95,10 @@ export class ProductsService {
 
   async insertMany(CreateProductDtos: CreateProductDto[]) {
     try {
-      const products = await Promise.all(
-        CreateProductDtos.map((product) => ({
-          ...product,
-          status: 'Disponible',
-        })),
-      );
+      const products = CreateProductDtos.map((product) => ({
+        ...product,
+        status: 'Disponible',
+      }));
       const insertProducts = await this.productModel.insertMany(products);
       return new ApiResponse(
         `${insertProducts.length} productos insertados exitosamente`,

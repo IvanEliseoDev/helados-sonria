@@ -8,9 +8,9 @@ export class AxiosAdapter implements HttpAdapter {
 
   async get<T>(url: string): Promise<T> {
     try {
-      const { data } = await this.axios.get(url);
+      const { data } = await this.axios.get<T>(url);
       return data;
-    } catch (error) {
+    } catch {
       throw new Error(
         'Esto es un error de axios - revisa los logs del servidor',
       );

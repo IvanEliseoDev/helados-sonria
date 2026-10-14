@@ -85,10 +85,10 @@ export const EventsTable = () => {
                                         <td className="py-4 px-4 text-center whitespace-nowrap">
                                             <span
                                                 className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${event.status === 'Pendiente'
-                                                        ? 'bg-amber-100 text-amber-800'
-                                                        : event.status === 'Aceptado'
-                                                            ? 'bg-blue-100 text-blue-800'
-                                                            : 'bg-emerald-100 text-emerald-800'
+                                                    ? 'bg-amber-100 text-amber-800'
+                                                    : event.status === 'Aceptado'
+                                                        ? 'bg-blue-100 text-blue-800'
+                                                        : 'bg-emerald-100 text-emerald-800'
                                                     }`}
                                             >
                                                 <Clock className="w-3.5 h-3.5" />
@@ -131,18 +131,18 @@ export const EventsTable = () => {
                                                             >
                                                                 <Edit className="w-4 h-4" /> Editar
                                                             </button>
-                                                            
-                                                                <button
-                                                                    onClick={() => {
-                                                                        setEventToCancelId(event._id);
-                                                                        setIsConfirmModalOpen(true);
-                                                                        setOpenMenuId(null);
-                                                                    }}
-                                                                    className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
-                                                                >
-                                                                    <Trash2 className="w-4 h-4" /> Cancelar
-                                                                </button>
-                                                        
+
+                                                            <button
+                                                                onClick={() => {
+                                                                    setEventToCancelId(event._id);
+                                                                    setIsConfirmModalOpen(true);
+                                                                    setOpenMenuId(null);
+                                                                }}
+                                                                className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                                                            >
+                                                                <Trash2 className="w-4 h-4" /> Cancelar
+                                                            </button>
+
                                                         </>)}
 
                                                     </div>

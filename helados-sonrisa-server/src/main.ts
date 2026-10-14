@@ -28,4 +28,7 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+void bootstrap().catch((error: unknown) => {
+  console.error('No se pudo iniciar el servidor:', error);
+  process.exitCode = 1;
+});

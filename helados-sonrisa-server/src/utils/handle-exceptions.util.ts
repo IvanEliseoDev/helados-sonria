@@ -11,10 +11,12 @@ export const handleDBException = (error: unknown, context: string): never => {
 
   if (mongoError.code === 11000) {
     const duplicateField = Object.keys(mongoError.keyValue || {})[0] || 'campo';
-    const value = mongoError.keyValue?.[duplicateField] || '';
+    const value = mongoError.keyValue?.[duplicateField];
+    const printableValue =
+      typeof value === 'string' || typeof value === 'number' ? value : '';
 
     throw new BadRequestException(
-      `El ${duplicateField} '${value}' ya está registrado en la base de datos.`,
+      `El ${duplicateField} '${printableValue}' ya está registrado en la base de datos.`,
     );
   }
 

@@ -1,4 +1,4 @@
 export interface MongoError {
   code: number;
-  keyValue: Record<string, any>;
+  keyValue: Record<string, unknown>;
 }

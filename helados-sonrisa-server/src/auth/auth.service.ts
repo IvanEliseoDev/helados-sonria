@@ -8,6 +8,13 @@ import { Response } from 'express';
 import { handleDBException } from 'src/utils/handle-exceptions.util';
 import { EmployeesService } from 'src/employees/employees.service';
 
+interface AuthUser {
+  _id: { toString(): string };
+  email: string;
+  password: string;
+  toObject(): Record<string, unknown>;
+}
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -19,16 +26,20 @@ export class AuthService {
   async login(loginDto: loginDto, res: Response) {
     try {
       const { email, password } = loginDto;
-      let user: any = null;
+      let user: AuthUser | null = null;
       let role: 'CLIENTE' | 'EMPLEADO' = 'CLIENTE';
       //? Buscar primero como Cliente
-      const customer = await this.customerService.findByEmailForAuth(email);
+      const customer = (await this.customerService.findByEmailForAuth(
+        email,
+      )) as AuthUser | null;
       if (customer) {
         user = customer;
         role = 'CLIENTE';
       } else {
         //* Si no es cliente, buscar como Empleado
-        const employee = await this.employeeService.findByEmailForAuth(email);
+        const employee = (await this.employeeService.findByEmailForAuth(
+          email,
+        )) as AuthUser | null;
         if (employee) {
           user = employee;
           role = 'EMPLEADO';
@@ -53,12 +64,12 @@ export class AuthService {
             ),
           );
       }
-      const userObj = user.toObject ? user.toObject() : { ...user };
+      const userObj = user.toObject();
       delete userObj.password;
       //! Generar y firmar JWT
       const payload = {
-        id: userObj._id,
-        email: userObj.email,
+        id: user._id.toString(),
+        email: user.email,
         role: role,
       };
       const token = this.jwtService.sign(payload);
@@ -71,7 +82,7 @@ export class AuthService {
       });
       return res.status(200).json(
         new ApiResponse('Inicio de sesión exitoso', 200, {
-          user,
+          user: userObj,
           role,
         }),
       );
@@ -82,7 +93,7 @@ export class AuthService {
   }
   async me(userPayload: { id: string; email: string; role: string }) {
     try {
-      let user: any = null;
+      let user: unknown = null;
 
       // 1. Validar según el rol guardado en el Payload del Token
       if (userPayload.role === 'CLIENTE') {
@@ -96,14 +107,13 @@ export class AuthService {
         }
       }
 
-      const userData = user?.data || user;
-      if (!userData) {
+      if (!user) {
         throw new NotFoundException('Usuario no encontrado');
       }
 
       // Retornamos un objeto plano limpio, sin referencias circulares
       return new ApiResponse('Perfil obtenido exitosamente', 200, {
-        user: userData,
+        user,
         role: userPayload.role,
       });
     } catch (error) {
@@ -112,7 +122,7 @@ export class AuthService {
     }
   }
 
-  async logout(res: Response) {
+  logout(res: Response) {
     try {
       // Para borrar la cookie, debemos pasar exactamente la misma clave y opciones
       res.clearCookie('access_cookie', {

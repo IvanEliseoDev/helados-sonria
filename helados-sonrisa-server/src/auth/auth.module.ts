@@ -5,12 +5,17 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { CustomersModule } from 'src/customers/customers.module';
 import { EmployeesModule } from 'src/employees/employees.module';
+import { ConfigService } from '@nestjs/config';
+import { EnvConfig } from 'src/config/config';
 
 @Module({
   imports: [
-    JwtModule.register({
-      secret: 'helados_sonrisa_secret_key_0110101',
-      signOptions: { expiresIn: '25d' }, //? El token expira en 25 dias
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService<EnvConfig, true>) => ({
+        secret: configService.getOrThrow<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '25d' },
+      }),
     }),
     CustomersModule,
     EmployeesModule,

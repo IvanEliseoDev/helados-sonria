@@ -41,7 +41,9 @@ export class EventsController {
 
   @Get('/me')
   @UseGuards(AuthGuard('jwt'))
-  findMyEvents(@GetUser() userPayload: any) {
+  findMyEvents(
+    @GetUser() userPayload: { id?: string; userId?: string; sub?: string },
+  ) {
     return this.eventsService.findCustomerMeEvent(userPayload);
   }
 
