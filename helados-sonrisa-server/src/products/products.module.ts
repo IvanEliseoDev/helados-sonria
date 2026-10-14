@@ -11,10 +11,10 @@ import { Product, productSchema } from './entities/product.entity';
     MongooseModule.forFeature([
       {
         name: Product.name,
-        schema: productSchema
-      }
-    ])
+        schema: productSchema,
+      },
+    ]),
   ],
-  exports: [ProductsService]
+  exports: [ProductsService],
 })
 export class ProductsModule {}

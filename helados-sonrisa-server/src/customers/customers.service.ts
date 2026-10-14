@@ -11,19 +11,20 @@ import { Employee } from 'src/employees/entities/employee.entity';
 
 @Injectable()
 export class CustomersService {
-
   constructor(
     @InjectModel(Customer.name) private readonly customerModel: Model<Customer>,
-    @InjectModel(Employee.name) private readonly employeeModel: Model<Employee>
-  ) { }
+    @InjectModel(Employee.name) private readonly employeeModel: Model<Employee>,
+  ) {}
 
   async create(createCustomerDto: CreateCustomerDto) {
     try {
       const { email, password } = createCustomerDto;
-      const isExistEmail = await this.employeeModel.findOne({ email })
-      if (isExistEmail) return new ApiResponse("Este correo ya ha sido utilizado", 400, null)
-      const isExistCustomer = await this.customerModel.findOne({ email })
-      if (isExistCustomer) return new ApiResponse("Este correo ya ha sido utilizado", 400, null)
+      const isExistEmail = await this.employeeModel.findOne({ email });
+      if (isExistEmail)
+        return new ApiResponse('Este correo ya ha sido utilizado', 400, null);
+      const isExistCustomer = await this.customerModel.findOne({ email });
+      if (isExistCustomer)
+        return new ApiResponse('Este correo ya ha sido utilizado', 400, null);
       const hashedPassword = await bcrypt.hash(password, 10);
       const newCustomer = await this.customerModel.create({
         ...createCustomerDto,
@@ -33,7 +34,7 @@ export class CustomersService {
 
       const customerObj = newCustomer.toObject();
       delete (customerObj as any).password;
-      return new ApiResponse("Cliente creado exitosamente", 201, customerObj);
+      return new ApiResponse('Cliente creado exitosamente', 201, customerObj);
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
       handleDBException(error, CustomersService.name);
@@ -47,9 +48,9 @@ export class CustomersService {
         .select('-password -loginAttempts -lockUntil');
 
       if (customers.length === 0) {
-        throw new NotFoundException("No existen clientes registrados");
+        throw new NotFoundException('No existen clientes registrados');
       }
-      return new ApiResponse("Clientes obtenidos exitosamente", 200, customers);
+      return new ApiResponse('Clientes obtenidos exitosamente', 200, customers);
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
       handleDBException(error, CustomersService.name);
@@ -60,21 +61,27 @@ export class CustomersService {
     try {
       let customer: Customer | null = null;
       if (isValidObjectId(term)) {
-        customer = await this.customerModel.findById(term).select('-password -loginAttempts -lockUntil');
+        customer = await this.customerModel
+          .findById(term)
+          .select('-password -loginAttempts -lockUntil');
       }
       if (!customer) {
-        customer = await this.customerModel.findOne({
-          $or: [
-            { firstName: { $regex: term, $options: 'i' } },
-            { lastName: { $regex: term, $options: 'i' } },
-            { email: term.toLowerCase().trim() }
-          ],
-        }).select('-password -loginAttempts -lockUntil');
+        customer = await this.customerModel
+          .findOne({
+            $or: [
+              { firstName: { $regex: term, $options: 'i' } },
+              { lastName: { $regex: term, $options: 'i' } },
+              { email: term.toLowerCase().trim() },
+            ],
+          })
+          .select('-password -loginAttempts -lockUntil');
       }
       if (!customer) {
-        throw new NotFoundException(`No se encontró ningún cliente con el término: "${term}"`);
+        throw new NotFoundException(
+          `No se encontró ningún cliente con el término: "${term}"`,
+        );
       }
-      return new ApiResponse("Cliente encontrado", 200, customer);
+      return new ApiResponse('Cliente encontrado', 200, customer);
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
       handleDBException(error, CustomersService.name);
@@ -84,14 +91,22 @@ export class CustomersService {
   async update(term: string, updateCustomerDto: UpdateCustomerDto) {
     try {
       const { password, email, ...updateData } = updateCustomerDto;
-      const filter = isValidObjectId(term) ? { _id: term } : { email: term.toLowerCase().trim() };
+      const filter = isValidObjectId(term)
+        ? { _id: term }
+        : { email: term.toLowerCase().trim() };
       const updatedCustomer = await this.customerModel
         .findOneAndUpdate(filter, updateData, { new: true })
-        .select("-password -loginAttempts -lockUntil");
+        .select('-password -loginAttempts -lockUntil');
       if (!updatedCustomer) {
-        throw new NotFoundException(`No se encontró ningún cliente con el término: "${term}"`);
+        throw new NotFoundException(
+          `No se encontró ningún cliente con el término: "${term}"`,
+        );
       }
-      return new ApiResponse("Cliente actualizado exitosamente", 200, updatedCustomer);
+      return new ApiResponse(
+        'Cliente actualizado exitosamente',
+        200,
+        updatedCustomer,
+      );
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
       handleDBException(error, CustomersService.name);
@@ -101,16 +116,20 @@ export class CustomersService {
   //* Borrado Físico por término (MongoID o Email)
   async remove(term: string) {
     try {
-      const filter = isValidObjectId(term) ? { _id: term } : { email: term.toLowerCase().trim() };
+      const filter = isValidObjectId(term)
+        ? { _id: term }
+        : { email: term.toLowerCase().trim() };
       const deletedCustomer = await this.customerModel.findOneAndDelete(filter);
 
       if (!deletedCustomer) {
-        throw new NotFoundException(`No se encontró ningún cliente para eliminar con el término: "${term}"`);
+        throw new NotFoundException(
+          `No se encontró ningún cliente para eliminar con el término: "${term}"`,
+        );
       }
 
       return new ApiResponse(`Cliente eliminado físicamente con éxito`, 200, {
         id: deletedCustomer._id,
-        email: deletedCustomer.email
+        email: deletedCustomer.email,
       });
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
@@ -121,16 +140,25 @@ export class CustomersService {
   //* Desactivación Lógica (Soft Delete / Toggle isActive)
   async toggleActiveStatus(term: string) {
     try {
-      const filter = isValidObjectId(term) ? { _id: term } : { email: term.toLowerCase().trim() };
+      const filter = isValidObjectId(term)
+        ? { _id: term }
+        : { email: term.toLowerCase().trim() };
       const customer = await this.customerModel.findOne(filter);
       if (!customer) {
-        throw new NotFoundException(`No se encontró el cliente con el término: "${term}"`);
+        throw new NotFoundException(
+          `No se encontró el cliente con el término: "${term}"`,
+        );
       }
       // Invierte el estado actual del cliente (true -> false / false -> true)
       customer.isActive = !customer.isActive;
       await customer.save();
-      const message = customer.isActive ? "Cliente activado exitosamente" : "Cliente desactivado exitosamente";
-      return new ApiResponse(message, 200, { id: customer._id, isActive: customer.isActive });
+      const message = customer.isActive
+        ? 'Cliente activado exitosamente'
+        : 'Cliente desactivado exitosamente';
+      return new ApiResponse(message, 200, {
+        id: customer._id,
+        isActive: customer.isActive,
+      });
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
       handleDBException(error, CustomersService.name);
@@ -150,15 +178,16 @@ export class CustomersService {
             password: hashedPassword,
             isActive: true,
           };
-        })
+        }),
       );
 
-      const insertedCustomers = await this.customerModel.insertMany(customersToInsert);
+      const insertedCustomers =
+        await this.customerModel.insertMany(customersToInsert);
 
       return new ApiResponse(
         `${insertedCustomers.length} clientes fueron insertados exitosamente`,
         201,
-        { count: insertedCustomers.length }
+        { count: insertedCustomers.length },
       );
     } catch (error) {
       handleDBException(error, CustomersService.name);
@@ -169,7 +198,11 @@ export class CustomersService {
   async removeAll() {
     try {
       const { deletedCount } = await this.customerModel.deleteMany({});
-      return new ApiResponse("Todos los registros de clientes fueron eliminados", 200, { deletedCount });
+      return new ApiResponse(
+        'Todos los registros de clientes fueron eliminados',
+        200,
+        { deletedCount },
+      );
     } catch (error) {
       handleDBException(error, CustomersService.name);
     }
@@ -191,10 +224,9 @@ export class CustomersService {
     try {
       return await this.customerModel
         .findOne({ email: email.toLowerCase().trim() })
-        .select('-password'); 
+        .select('-password');
     } catch (error) {
       handleDBException(error, CustomersService.name);
     }
   }
 }
-

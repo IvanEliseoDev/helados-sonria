@@ -55,6 +55,11 @@ export const EventForm = () => {
             return evDateStr === form.initDate && ev.status !== 'Cancelado';
         });
 
+        if(form.description.length < 10) {
+            setErrorMsg("La descripcion debe llevar almenos 10 caracteres, debes de describir a detalle que deseas que se realice en el evento")
+            return;
+        }
+
         if (dateIsTaken) {
             setErrorMsg(`Ya tienes un evento registrado para el día ${form.initDate}. No puedes reservar dos eventos en la misma fecha.`);
             return;
@@ -192,8 +197,8 @@ export const EventForm = () => {
                             >
                                 <option value="Cumpleaños">Cumpleaños</option>
                                 <option value="Boda">Boda</option>
-                                <option value="Evento Empresarial">Evento Empresarial</option>
-                                <option value="Fiesta Infantil">Fiesta Infantil</option>
+                                <option value="Evento empresarial">Evento Empresarial</option>
+                                <option value="Fiesta infantil">Fiesta Infantil</option>
                                 <option value="Otro">Otro</option>
                             </select>
                         </div>

@@ -9,14 +9,14 @@ import { EmployeesModule } from 'src/employees/employees.module';
 @Module({
   imports: [
     JwtModule.register({
-      secret: "helados_sonrisa_secret_key_0110101",
-      signOptions: {expiresIn: '25d'} //? El token expira en 25 dias
+      secret: 'helados_sonrisa_secret_key_0110101',
+      signOptions: { expiresIn: '25d' }, //? El token expira en 25 dias
     }),
     CustomersModule,
-    EmployeesModule
+    EmployeesModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
-  exports: [AuthService]
+  exports: [AuthService],
 })
 export class AuthModule {}

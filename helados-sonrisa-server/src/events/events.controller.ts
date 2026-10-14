@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Put,
+} from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -8,17 +18,20 @@ import { CreateReserveEventDto } from './dto/create-reserve-event.dto';
 
 @Controller('events')
 export class EventsController {
-  constructor(private readonly eventsService: EventsService) { }
+  constructor(private readonly eventsService: EventsService) {}
 
   @Post()
   create(@Body() createEventDto: CreateEventDto) {
     return this.eventsService.create(createEventDto);
   }
 
-  @Post("/me")
+  @Post('/me')
   @UseGuards(AuthGuard('jwt'))
-  createReserveEvent(@Body() createEventDto: CreateReserveEventDto, @GetUser() userPayload: { userId: string; email: string; role: string }) {
-    return this.eventsService.createReserveEvent(createEventDto, userPayload)
+  createReserveEvent(
+    @Body() createEventDto: CreateReserveEventDto,
+    @GetUser() userPayload: { userId: string; email: string; role: string },
+  ) {
+    return this.eventsService.createReserveEvent(createEventDto, userPayload);
   }
 
   @Get()
@@ -26,7 +39,7 @@ export class EventsController {
     return this.eventsService.findAll();
   }
 
-  @Get("/me")
+  @Get('/me')
   @UseGuards(AuthGuard('jwt'))
   findMyEvents(@GetUser() userPayload: any) {
     return this.eventsService.findCustomerMeEvent(userPayload);
@@ -44,8 +57,12 @@ export class EventsController {
 
   @Put('/me/:term')
   @UseGuards(AuthGuard('jwt'))
-  updateMyEvent(@Param('term') term: string, @Body() updateEventDto: UpdateEventDto, @GetUser() userPayload: { userId: string; email: string; role: string }  ){
-    return this.eventsService.updateMyEvent(term, updateEventDto, userPayload)
+  updateMyEvent(
+    @Param('term') term: string,
+    @Body() updateEventDto: UpdateEventDto,
+    @GetUser() userPayload: { userId: string; email: string; role: string },
+  ) {
+    return this.eventsService.updateMyEvent(term, updateEventDto, userPayload);
   }
 
   @Delete(':id')
@@ -55,7 +72,10 @@ export class EventsController {
 
   @Delete('/me/:id')
   @UseGuards(AuthGuard('jwt'))
-  cancelEvent(@Param('id') id:string, @GetUser() userPayload: { userId: string; email: string; role: string }){
-    return this.eventsService.cancelMyEvent(id, userPayload)
+  cancelEvent(
+    @Param('id') id: string,
+    @GetUser() userPayload: { userId: string; email: string; role: string },
+  ) {
+    return this.eventsService.cancelMyEvent(id, userPayload);
   }
 }

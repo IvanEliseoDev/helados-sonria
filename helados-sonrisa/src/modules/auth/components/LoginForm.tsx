@@ -30,10 +30,12 @@ export const LoginForm = () => {
                 email: formData.email,
                 password: formData.password
             })
+            console.log({role: response.data.role})
             if(response.data.role === "EMPLEADO"){
                 navigate("/admin/inicio")
+            }else{
+                navigate("/")
             }
-            navigate("/")
         } catch (error) {
             console.error("Fallo al iniciar sesión:", error)
         }

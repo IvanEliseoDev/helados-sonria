@@ -23,7 +23,7 @@ interface EventsTableProps {
 
 export const EventsTable = ({ events, onUpdateStatus, onViewDetail, onDelete }: EventsTableProps) => {
     return (
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto overflow-y-visible pb-24">
             <table className="w-full text-left border-collapse">
                 <thead>
                     <tr className="text-xs font-extrabold text-[#3e1916]/50 uppercase tracking-wider border-b border-[#3e1916]/10 pb-3">
@@ -40,7 +40,7 @@ export const EventsTable = ({ events, onUpdateStatus, onViewDetail, onDelete }: 
                         const isRejected = event.status === 'Rechazado' || event.status === 'Cancelado';
 
                         return (
-                            <tr key={event._id} className="hover:bg-[#fff9f5] transition-colors group">
+                            <tr key={event._id} className="hover:bg-[#fff9f5] transition-colors group relative">
                                 <td className="py-4 px-4 font-bold text-[#3e1916] whitespace-nowrap">
                                     <div className="flex flex-col">
                                         <span className="text-base font-extrabold text-[#3e1916]">{event.title}</span>
@@ -67,18 +67,17 @@ export const EventsTable = ({ events, onUpdateStatus, onViewDetail, onDelete }: 
                                 </td>
                                 <td className="py-4 px-4 text-center whitespace-nowrap">
                                     <span
-                                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
-                                            isAccepted
+                                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${isAccepted
                                                 ? 'bg-emerald-100 text-emerald-800'
                                                 : isRejected
-                                                ? 'bg-red-100 text-red-800'
-                                                : 'bg-amber-100 text-amber-800'
-                                        }`}
+                                                    ? 'bg-red-100 text-red-800'
+                                                    : 'bg-amber-100 text-amber-800'
+                                            }`}
                                     >
                                         {event.status}
                                     </span>
                                 </td>
-                                <td className="py-4 px-4 text-center whitespace-nowrap">
+                                <td className="py-4 px-4 text-center whitespace-nowrap relative">
                                     <div className="flex items-center justify-center gap-2">
                                         {/* Botón Ver Detalle */}
                                         <button
@@ -88,22 +87,27 @@ export const EventsTable = ({ events, onUpdateStatus, onViewDetail, onDelete }: 
                                         >
                                             <Eye className="w-4 h-4" />
                                         </button>
-                                        {/* Botón Aceptar */}
-                                        <button
-                                            onClick={() => onUpdateStatus(event._id, 'Aceptado')}
-                                            title="Aceptar evento"
-                                            className="p-2 rounded-xl bg-emerald-100 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all cursor-pointer shadow-sm"
-                                        >
-                                            <CheckCircle2 className="w-4 h-4" />
-                                        </button>
-                                        {/* Botón Cancelar */}
-                                        <button
-                                            onClick={() => onUpdateStatus(event._id, 'Rechazado')}
-                                            title="Rechazar evento"
-                                            className="p-2 rounded-xl bg-red-100 text-red-600 hover:bg-red-600 hover:text-white transition-all cursor-pointer shadow-sm"
-                                        >
-                                            <XCircle className="w-4 h-4" />
-                                        </button>
+                                    
+                                        {/* Botón Rechazar / Aceptar */}
+                                        {event.status === "Pendiente" && (
+                                            <>
+                                                <button
+                                                    onClick={() => onUpdateStatus(event._id, 'Rechazado')}
+                                                    title="Rechazar evento"
+                                                    className="p-2 rounded-xl bg-red-100 text-red-600 hover:bg-red-600 hover:text-white transition-all cursor-pointer shadow-sm"
+                                                >
+                                                    <XCircle className="w-4 h-4" />
+                                                </button>
+                                                <button
+                                                    onClick={() => onUpdateStatus(event._id, 'Aceptado')}
+                                                    title="Aceptar evento"
+                                                    className="p-2 rounded-xl bg-emerald-100 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all cursor-pointer shadow-sm"
+                                                >
+                                                    <CheckCircle2 className="w-4 h-4" />
+                                                </button>
+                                            </>
+                                        )}
+
                                         <button
                                             onClick={() => onDelete(event._id)}
                                             title="Eliminar evento"
@@ -148,7 +152,7 @@ export const EventDetailModal = ({ isOpen, onClose, event }: EventDetailModalPro
                             {event.title}
                         </h2>
                     </div>
-                    <button 
+                    <button
                         onClick={onClose}
                         className="p-2 hover:bg-[#3e1916]/5 rounded-xl transition-colors cursor-pointer text-[#3e1916]/70"
                     >
@@ -190,13 +194,12 @@ export const EventDetailModal = ({ isOpen, onClose, event }: EventDetailModalPro
                     <div className="flex items-center justify-between pt-2">
                         <span className="text-xs font-bold text-[#3e1916]/50 uppercase">Estado Actual</span>
                         <span
-                            className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold ${
-                                isAccepted
+                            className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold ${isAccepted
                                     ? 'bg-emerald-100 text-emerald-800'
                                     : isRejected
-                                    ? 'bg-red-100 text-red-800'
-                                    : 'bg-amber-100 text-amber-800'
-                            }`}
+                                        ? 'bg-red-100 text-red-800'
+                                        : 'bg-amber-100 text-amber-800'
+                                }`}
                         >
                             {event.status}
                         </span>
@@ -290,7 +293,7 @@ export const AdminEventsPage = () => {
             </div>
 
             {/* Modal de Detalle Amplio */}
-            <EventDetailModal 
+            <EventDetailModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 event={selectedEvent}

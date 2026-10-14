@@ -7,13 +7,16 @@ import { ProductDetail } from "../modules/products/pages/ProductDetail";
 import { Authlayout } from "../modules/auth/layout/Authlayout";
 import { LoginPage } from "../modules/auth/pages/LoginPage"
 import { RegisterPage } from "../modules/auth/pages/RegisterPage";
-import { NotAuthenticatedRoute } from "./custom/ProtectedRoutes";
+import { AuthenticatedRoute, NotAuthenticatedRoute } from "./custom/ProtectedRoutes";
 import { ViewEventDetailPage } from "../modules/events/pages/ViewEventDetailPage";
 import { DashboardPage } from "../modules/admin/dashboard/pages/DashboardPage";
 import { AdminLayout } from "../modules/admin/layouts/AdminLayout";
 import { EmployeesPage } from "../modules/admin/employees/pages/EmployeesPage";
 import { CustomersPage } from "../modules/admin/customers/pages/CustomersPage";
 import { AdminEventsPage } from "../modules/admin/events/pages/EventPages";
+import { EmployeeProtectedRoutes } from "./custom/EmployeeProtectedRoutes";
+import { AdminProductsPage } from "../modules/admin/products/pages/ProductsPage";
+import { MyPerfilPage } from "../modules/myPerfil/pages/MyPerfilPage";
 
 export const appRouter = createBrowserRouter([
     {
@@ -41,6 +44,10 @@ export const appRouter = createBrowserRouter([
         element:  <ViewEventDetailPage /> 
     },
     {
+        path: "/mi-perfil",
+        element: <MyPerfilPage />
+    },
+    {
         path: "/auth",
         element: <Authlayout />,
         children: [
@@ -56,23 +63,27 @@ export const appRouter = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <AdminLayout />,
+        element:<AuthenticatedRoute> <EmployeeProtectedRoutes> <AdminLayout /> </EmployeeProtectedRoutes> </AuthenticatedRoute>,
         children: [
             {
                 path: "inicio",
-                element:<DashboardPage />
+                element:<EmployeeProtectedRoutes> <DashboardPage /> </EmployeeProtectedRoutes>
             },
             {
                 path: "empleados",
-                element: <EmployeesPage />
+                element: <EmployeeProtectedRoutes> <EmployeesPage /> </EmployeeProtectedRoutes>
             },
             {
                 path: "clientes",
-                element: <CustomersPage />
+                element: <EmployeeProtectedRoutes> <CustomersPage /> </EmployeeProtectedRoutes>
             },
             {
                 path: "eventos",
-                element: <AdminEventsPage />
+                element: <EmployeeProtectedRoutes> <AdminEventsPage /> </EmployeeProtectedRoutes>
+            },
+            {
+                path: "productos",
+                element: <EmployeeProtectedRoutes> <AdminProductsPage /> </EmployeeProtectedRoutes>
             }
         ]
     }

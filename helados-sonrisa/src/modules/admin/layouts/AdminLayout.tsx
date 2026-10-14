@@ -1,12 +1,17 @@
 import { useState } from 'react'
-import { Outlet, Link, useLocation } from 'react-router'
+import { Outlet, Link, useLocation, useNavigate } from 'react-router'
 import { 
   LayoutDashboard, Users, Users2, PartyPopper, IceCream2, 
   LogOut, Menu, X, User, ChevronLeft, ChevronRight
 } from 'lucide-react'
 import logo from "../../../assets/logo-sonrisas.png"
+import { useAuth } from '../../../auth/hooks/useAuthMutate'
+import { useAuthStore } from '../../../auth/store/auth.store'
 
 export const AdminLayout = () => {
+  const navigate = useNavigate()
+  const {logout} = useAuth()
+  const {user} = useAuthStore()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false)
   const location = useLocation()
@@ -20,6 +25,10 @@ export const AdminLayout = () => {
   ]
 
   const isActive = (path: string) => location.pathname === path
+  const handleLogOut = () => {
+    logout()
+    navigate("/auth/login")
+  }
 
   return (
     <div className="min-h-screen bg-[#fffcf9] flex flex-col md:flex-row relative font-bricolage selection:bg-[#35ab9f]/20">
@@ -108,8 +117,8 @@ export const AdminLayout = () => {
                 <User className="w-4 h-4" />
               </div>
               <div className="truncate">
-                <p className="text-xs font-bold text-[#3e1916] truncate">Administrador</p>
-                <p className="text-[10px] text-[#3e1916]/50 truncate">admin@sonrisas.com</p>
+                <p className="text-xs font-bold text-[#3e1916] truncate">{`${user?.firstName.split(" ")[0]} ${user?.lastName.split(" ")[0]}`}</p>
+                <p className="text-[10px] text-[#3e1916]/50 truncate">{user?.email}</p>
               </div>
             </div>
             
@@ -121,14 +130,14 @@ export const AdminLayout = () => {
             )}
           </div>
           
-          <Link
-            to="/login"
+          <button
+            onClick={handleLogOut}
             title={isCollapsed ? "Cerrar Sesión" : undefined}
-            className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50/80 transition-colors w-full ${isCollapsed ? 'md:justify-center' : ''}`}
+            className={`flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50/80 transition-colors w-full cursor-pointer ${isCollapsed ? 'md:justify-center' : ''}`}
           >
             <LogOut className="w-4 h-4 shrink-0" />
             <span className={`whitespace-nowrap ${isCollapsed ? 'md:hidden' : ''}`}>Cerrar Sesión</span>
-          </Link>
+          </button>
         </div>
       </aside>
 

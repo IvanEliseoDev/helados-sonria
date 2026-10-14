@@ -10,7 +10,7 @@ export const HSonrisasApp = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthBootstrap />
-      <Toaster richColors position="top-right" />
+      <Toaster richColors position="top-right" closeButton />
       <RouterProvider router={appRouter} />
     </QueryClientProvider>
   )

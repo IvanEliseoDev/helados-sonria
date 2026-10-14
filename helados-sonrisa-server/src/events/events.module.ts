@@ -7,12 +7,14 @@ import { Event, eventSchema } from './entities/event.entity';
 @Module({
   controllers: [EventsController],
   providers: [EventsService],
-  imports: [MongooseModule.forFeature([
-    {
-      name: Event.name,
-      schema: eventSchema
-    }
-  ])],
-  exports: [EventsService]
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: Event.name,
+        schema: eventSchema,
+      },
+    ]),
+  ],
+  exports: [EventsService],
 })
-export class EventsModule { }
+export class EventsModule {}

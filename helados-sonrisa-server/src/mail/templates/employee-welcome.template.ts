@@ -1,12 +1,17 @@
 export interface EmployeeWelcomeData {
-    name: string;
-    year?: number;
-    user:  string;
-    password: string;
+  name: string;
+  year?: number;
+  user: string;
+  password: string;
 }
 
-export const getEmployeeWelcomeTemplate = ({ name, user, password, year = new Date().getFullYear() }: EmployeeWelcomeData): string => {
-    return `
+export const getEmployeeWelcomeTemplate = ({
+  name,
+  user,
+  password,
+  year = new Date().getFullYear(),
+}: EmployeeWelcomeData): string => {
+  return `
     <!DOCTYPE html>
     <html lang="es">
     <head>
@@ -44,7 +49,7 @@ export const getEmployeeWelcomeTemplate = ({ name, user, password, year = new Da
           </div>
           <p>Si tienes alguna consulta inicial sobre tus credenciales o acceso, ponte en contacto con tu administrador o supervisor de turno.</p>
           <div class="btn-container">
-            <a href="https://helados-sonrisas.vercel.app/" class="btn">Acceder al Sistema</a>
+            <a href="https://helados-sonrisas.vercel.app/auth/login" class="btn">Acceder al Sistema</a>
           </div>
         </div>
         <div class="footer">

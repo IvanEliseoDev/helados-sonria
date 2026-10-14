@@ -10,12 +10,11 @@ import { EmployeesService } from 'src/employees/employees.service';
 
 @Injectable()
 export class AuthService {
-
   constructor(
     private readonly jwtService: JwtService,
     private readonly customerService: CustomersService,
-    private readonly employeeService: EmployeesService
-  ) { }
+    private readonly employeeService: EmployeesService,
+  ) {}
 
   async login(loginDto: loginDto, res: Response) {
     try {
@@ -103,7 +102,7 @@ export class AuthService {
       }
 
       // Retornamos un objeto plano limpio, sin referencias circulares
-      return new ApiResponse("Perfil obtenido exitosamente", 200, {
+      return new ApiResponse('Perfil obtenido exitosamente', 200, {
         user: userData,
         role: userPayload.role,
       });
@@ -122,12 +121,10 @@ export class AuthService {
         secure: true,
       });
 
-      return new ApiResponse("Sesión cerrada exitosamente", 200, null);
+      return new ApiResponse('Sesión cerrada exitosamente', 200, null);
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
       handleDBException(error, AuthService.name);
     }
   }
-
-
 }

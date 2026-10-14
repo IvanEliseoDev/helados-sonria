@@ -1,11 +1,14 @@
-import { Users, Clock, XCircle, AlertCircle, ChevronRight, Calendar, TrendingUp, ShieldAlert, User } from 'lucide-react'
+import { Users, Clock, XCircle, AlertCircle, ChevronRight, Calendar, ShieldAlert, User } from 'lucide-react'
+import { useGetAdminDashboard } from '../hooks/useGetAdminDashboard'
 
 export const DashboardPage = () => {
-  const pendingEvents = [
-    { id: 1, client: 'María Fernanda Gómez', eventType: 'Cumpleaños Infantil', date: '15 Oct 2026', guests: '35 personas', status: 'Pendiente' },
-    { id: 2, client: 'Carlos Roberto Mendoza', eventType: 'Aniversario', date: '18 Oct 2026', guests: '50 personas', status: 'Pendiente' },
-    { id: 3, client: 'Ana Sofía Rivas', eventType: 'Fiesta Sorpresa', date: '22 Oct 2026', guests: '25 personas', status: 'Pendiente' },
-  ]
+  const {data:EventsData, isPending} = useGetAdminDashboard()
+
+  if(isPending) return (
+    <div className="space-y-8 font-bricolage">
+      <h1>Cargando...</h1>
+    </div>
+  )
 
   return (
     <div className="space-y-8 font-bricolage">
@@ -40,9 +43,9 @@ export const DashboardPage = () => {
           <div className="flex items-center justify-between relative z-10">
             <div className="space-y-1.5">
               <p className="text-xs font-bold uppercase tracking-wider text-[#3e1916]/50">Total Clientes</p>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-[#3e1916]">1,248</h3>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-[#3e1916]">{EventsData?.data.kpiCards.totalCustomers}</h3>
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#35ab9f] bg-[#35ab9f]/10 px-2.5 py-1 rounded-lg">
-                <TrendingUp className="w-3.5 h-3.5" /> +12% este mes
+                muy bien
               </span>
             </div>
             <div className="w-14 h-14 bg-linear-to-br from-[#35ab9f]/20 to-[#35ab9f]/5 rounded-2xl flex items-center justify-center text-[#35ab9f] border border-[#35ab9f]/20 shadow-xs">
@@ -57,7 +60,7 @@ export const DashboardPage = () => {
           <div className="flex items-center justify-between relative z-10">
             <div className="space-y-1.5">
               <p className="text-xs font-bold uppercase tracking-wider text-[#3e1916]/50">Eventos Pendientes</p>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-[#3e1916]">12</h3>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-[#3e1916]">{EventsData?.data.kpiCards.totalEventsPending}</h3>
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200/50">
                 <ShieldAlert className="w-3.5 h-3.5" /> Requieren revisión
               </span>
@@ -74,7 +77,7 @@ export const DashboardPage = () => {
           <div className="flex items-center justify-between relative z-10">
             <div className="space-y-1.5">
               <p className="text-xs font-bold uppercase tracking-wider text-[#3e1916]/50">Eventos Cancelados</p>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-[#3e1916]">3</h3>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-[#3e1916]">{EventsData?.data.kpiCards.cancelEvents}</h3>
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-lg border border-red-200/50">
                 Este mes
               </span>
@@ -105,24 +108,24 @@ export const DashboardPage = () => {
         </div>
 
         <div className="divide-y divide-[#3e1916]/10">
-          {pendingEvents.map((event) => (
-            <div key={event.id} className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#fffcf9] transition-colors">
+          {EventsData?.data.eventsPendingView.map((event) => (
+            <div key={event._id} className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#fffcf9] transition-colors">
               
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-[#35ab9f]/10 text-[#35ab9f] flex items-center justify-center shrink-0 border border-[#35ab9f]/20 shadow-xs mt-0.5">
                   <Calendar className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="text-sm sm:text-base font-bold text-[#3e1916]">{event.client}</h4>
+                  <h4 className="text-sm sm:text-base font-bold text-[#3e1916]">{event.name}</h4>
                   <p className="text-xs text-[#3e1916]/60 font-semibold">
-                    {event.eventType} • <span className="text-[#3e1916]/80 font-bold bg-[#3e1916]/5 px-2 py-0.5 rounded-md">{event.guests}</span>
+                    {event.eventType} • <span className="text-[#3e1916]/80 font-bold bg-[#3e1916]/5 px-2 py-0.5 rounded-md">{event.eventTime}</span>
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center justify-between sm:justify-end gap-5">
                 <div className="text-right space-y-1">
-                  <span className="text-xs font-bold text-[#3e1916] block">{event.date}</span>
+                  <span className="text-xs font-bold text-[#3e1916] block">{event.initDate}</span>
                   <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200/50">
                     <Clock className="w-3 h-3" /> {event.status}
                   </span>

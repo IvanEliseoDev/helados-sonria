@@ -18,7 +18,8 @@ export const EmployeesTable = ({ employees, onToggleStatus, onEdit, onView, onDe
 
     return (
         <div className="relative">
-            <div className="overflow-x-auto">
+            {/* Se añade overflow-y-visible para permitir que el menú flotante desborde sin recortarse */}
+            <div className="overflow-x-auto overflow-y-visible pb-24">
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="text-xs font-extrabold text-[#3e1916]/50 uppercase tracking-wider border-b border-[#3e1916]/5">

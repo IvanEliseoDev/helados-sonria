@@ -1,6 +1,6 @@
 export enum EventStatus {
-  PENDIENTE = "Pendiente",
-  ACEPTADO = "Aceptado",
-  RECHAZADO = "Rechazado",
-  CANCELADO = "Cancelado",
+  PENDIENTE = 'Pendiente',
+  ACEPTADO = 'Aceptado',
+  RECHAZADO = 'Rechazado',
+  CANCELADO = 'Cancelado',
 }

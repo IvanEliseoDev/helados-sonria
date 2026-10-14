@@ -22,31 +22,31 @@ export const PublicEventsPage = () => {
   const empresas = [
     {
       id: 1,
-      nombre: 'TELUS International El Salvador',
+      nombre: 'Cubo udb',
       tag: 'Corporativo',
       logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=300&auto=format&fit=crop&q=80'
     },
     {
       id: 2,
-      nombre: 'Banco Agrícola S.A.',
+      nombre: 'Parque Cuscatlan',
       tag: 'Financiero',
       logo: 'https://images.unsplash.com/photo-1516876437184-593fda40c7ce?w=300&auto=format&fit=crop&q=80'
     },
     {
       id: 3,
-      nombre: 'Almacenes Siman Centroamérica',
+      nombre: 'Telus',
       tag: 'Retail',
       logo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=300&auto=format&fit=crop&q=80'
     },
     {
       id: 4,
-      nombre: 'Applaudo Software Studios',
+      nombre: 'Parque Cuscatlan',
       tag: 'Tech',
       logo: 'https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=300&auto=format&fit=crop&q=80'
     },
     {
       id: 5,
-      nombre: 'Hotel Sheraton Presidente',
+      nombre: 'Parque Cuscatlan',
       tag: 'Hostelería',
       logo: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&auto=format&fit=crop&q=80'
     },
@@ -56,7 +56,7 @@ export const PublicEventsPage = () => {
   const eventos: EventoPasado[] = [
     {
       id: 1,
-      titulo: 'Boda Sofía & Mateo',
+      titulo: 'Boda',
       categoria: 'Boda',
       fecha: 'Febrero 2026',
       ubicacion: 'San Salvador',
@@ -66,7 +66,7 @@ export const PublicEventsPage = () => {
     },
     {
       id: 2,
-      titulo: 'Aniversario Tech Hub',
+      titulo: 'Aniversario ',
       categoria: 'Corporativo',
       fecha: 'Enero 2026',
       ubicacion: 'Santa Tecla',
@@ -76,7 +76,7 @@ export const PublicEventsPage = () => {
     },
     {
       id: 3,
-      titulo: 'Fiesta Infantil Marina',
+      titulo: 'Fiesta Infantil ',
       categoria: 'Cumpleaños',
       fecha: 'Diciembre 2025',
       ubicacion: 'Antiguo Cuscatlán',
@@ -86,7 +86,7 @@ export const PublicEventsPage = () => {
     },
     {
       id: 4,
-      titulo: 'Gala Anual de Marcas',
+      titulo: 'Gala Anual ',
       categoria: 'Corporativo',
       fecha: 'Noviembre 2025',
       ubicacion: 'San Salvador',

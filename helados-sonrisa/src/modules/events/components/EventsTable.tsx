@@ -20,7 +20,7 @@ export const EventsTable = () => {
     const navigate = useNavigate();
     const { data, isLoading } = useGetEventsMe();
     const { mutate: cancelEvent, isPending: isCancelling } = useCancelMyEvent();
-    
+
     const myEvents = data?.data;
     const isEmpty = !myEvents && isLoading;
 
@@ -37,7 +37,8 @@ export const EventsTable = () => {
 
     return (
         <div className="relative">
-            <div className="overflow-x-auto">
+            {/* Quitamos clases restrictivas de desbordamiento vertical para permitir que el menú flote libremente */}
+            <div className="overflow-x-auto overflow-y-visible pb-24">
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="text-xs font-extrabold text-[#3e1916]/50 uppercase tracking-wider border-b border-[#3e1916]/5">
@@ -53,8 +54,8 @@ export const EventsTable = () => {
                     {(!isEmpty && myEvents !== undefined) && (
                         <tbody className="divide-y divide-[#3e1916]/5 text-sm">
                             {myEvents.map((event) => {
-                                const formattedDate = event.initDate 
-                                    ? new Date(event.initDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' }) 
+                                const formattedDate = event.initDate
+                                    ? new Date(event.initDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })
                                     : '';
 
                                 return (
@@ -83,13 +84,12 @@ export const EventsTable = () => {
                                         </td>
                                         <td className="py-4 px-4 text-center whitespace-nowrap">
                                             <span
-                                                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
-                                                    event.status === 'Pendiente'
+                                                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${event.status === 'Pendiente'
                                                         ? 'bg-amber-100 text-amber-800'
                                                         : event.status === 'Aceptado'
                                                             ? 'bg-blue-100 text-blue-800'
                                                             : 'bg-emerald-100 text-emerald-800'
-                                                }`}
+                                                    }`}
                                             >
                                                 <Clock className="w-3.5 h-3.5" />
                                                 {event.status}
@@ -105,11 +105,12 @@ export const EventsTable = () => {
 
                                             {openMenuId === event._id && (
                                                 <>
-                                                    <div 
-                                                        className="fixed inset-0 z-40" 
+                                                    <div
+                                                        className="fixed inset-0 z-40"
                                                         onClick={() => setOpenMenuId(null)}
                                                     />
-                                                    <div className="absolute right-12 top-12 w-40 bg-white border border-[#3e1916]/10 rounded-2xl shadow-xl z-50 py-2 flex flex-col text-left">
+                                                    {/* Usamos absolute con coordenadas precisas para que el menú aparezca ordenadamente hacia la izquierda y abajo del botón */}
+                                                    <div className="absolute right-10 top-12 w-40 bg-white border border-[#3e1916]/10 rounded-2xl shadow-2xl z-50 py-2 flex flex-col text-left">
                                                         <button
                                                             onClick={() => {
                                                                 navigate(`/eventos/agendar/ver/${event._id}`);
@@ -119,28 +120,31 @@ export const EventsTable = () => {
                                                         >
                                                             <Eye className="w-4 h-4" /> Ver
                                                         </button>
-                                                        <button
-                                                            onClick={() => {
-                                                                setSelectedEventId(event._id);
-                                                                setIsEditModalOpen(true);
-                                                                setOpenMenuId(null);
-                                                            }}
-                                                            className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-[#3e1916] hover:bg-[#35ab9f]/10 hover:text-[#35ab9f] transition-colors cursor-pointer"
-                                                        >
-                                                            <Edit className="w-4 h-4" /> Editar
-                                                        </button>
-                                                        {event.status !== 'Cancelado' && (
+                                                        {event.status === "Pendiente" && (<>
                                                             <button
                                                                 onClick={() => {
-                                                                    setEventToCancelId(event._id);
-                                                                    setIsConfirmModalOpen(true);
+                                                                    setSelectedEventId(event._id);
+                                                                    setIsEditModalOpen(true);
                                                                     setOpenMenuId(null);
                                                                 }}
-                                                                className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                                                                className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-[#3e1916] hover:bg-[#35ab9f]/10 hover:text-[#35ab9f] transition-colors cursor-pointer"
                                                             >
-                                                                <Trash2 className="w-4 h-4" /> Cancelar
+                                                                <Edit className="w-4 h-4" /> Editar
                                                             </button>
-                                                        )}
+                                                            
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setEventToCancelId(event._id);
+                                                                        setIsConfirmModalOpen(true);
+                                                                        setOpenMenuId(null);
+                                                                    }}
+                                                                    className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                                                                >
+                                                                    <Trash2 className="w-4 h-4" /> Cancelar
+                                                                </button>
+                                                        
+                                                        </>)}
+
                                                     </div>
                                                 </>
                                             )}
